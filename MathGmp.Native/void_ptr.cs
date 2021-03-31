@@ -9,7 +9,7 @@ namespace MathGmp.Native
     /// Represents a pointer to a block of unmanaged memory.
     /// </summary>
     /// <remarks></remarks>
-    public struct void_ptr: IDisposable
+    public struct void_ptr : IDisposable
     {
 
         private IntPtr _pointer;

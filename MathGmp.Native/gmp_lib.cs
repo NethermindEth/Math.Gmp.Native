@@ -996,12 +996,9 @@ namespace MathGmp.Native
         /// </summary>
         /// <param name="dst">A pointer to the memory block to be filled with zeros.</param>
         /// <param name="length">The number of bytes to fill with zeros.</param>
-        public static void ZeroMemory(IntPtr dst, int length)
+        public unsafe static void ZeroMemory(IntPtr dst, int length)
         {
-            unsafe
-            {
-                Unsafe.InitBlockUnaligned((byte*)dst, 0, (uint) length);
-            }
+            Unsafe.InitBlockUnaligned((byte*)dst, 0, (uint) length);
         }
 
         #endregion

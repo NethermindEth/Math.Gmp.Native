@@ -10,7 +10,7 @@ namespace MathGmp.Native
     /// </summary>
     /// <remarks></remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1049:TypesThatOwnNativeResourcesShouldBeDisposable")]
-    public struct char_ptr: IDisposable
+    public struct char_ptr : IDisposable
     {
 
         /// <summary>
