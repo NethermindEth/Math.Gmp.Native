@@ -1,6 +1,6 @@
 ﻿
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Runtime.InteropServices;
 using MathGmp.Native;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 
 namespace UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class UnitTest
     {
 
@@ -34,7 +34,7 @@ namespace UnitTests
 
         #region "Types."
 
-        [TestMethod]
+        [Test]
         public void char_ptr_test()
         {
             // Create new string in unmanaged memory.
@@ -63,7 +63,7 @@ namespace UnitTests
             gmp_lib.free(t);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randstate_t_test()
         {
             // Allocate and release random number generator state.
@@ -71,7 +71,7 @@ namespace UnitTests
             gmp_lib.free(state);
         }
 
-        [TestMethod]
+        [Test]
         public void mp_bitcnt_t_test()
         {
             // uint
@@ -134,7 +134,7 @@ namespace UnitTests
             Assert.IsTrue((new mp_bitcnt_t(8)) != (new mp_bitcnt_t(9)));
         }
 
-        //[TestMethod]
+        //[Test]
         //public void mp_exp_ptr_test()
         //{
         //    // Create new exponent pointer.
@@ -169,7 +169,7 @@ namespace UnitTests
         //    gmp_lib.free(j);
         //}
 
-        [TestMethod]
+        [Test]
         public void mp_exp_t_test()
         {
             // int
@@ -239,7 +239,7 @@ namespace UnitTests
             Assert.IsTrue((new mp_exp_t(8)) != (new mp_exp_t(9)));
         }
 
-        [TestMethod]
+        [Test]
         public void mp_limb_t_test()
         {
             //ulong
@@ -302,7 +302,7 @@ namespace UnitTests
             Assert.IsTrue((new mp_limb_t(8)) != (new mp_limb_t(9)));
         }
 
-        [TestMethod]
+        [Test]
         public void mp_ptr_test()
         {
             mp_ptr bytes0 = new mp_ptr(new byte[0]);
@@ -433,7 +433,7 @@ namespace UnitTests
             gmp_lib.free(ulong1);
         }
 
-        [TestMethod]
+        [Test]
         public void mp_size_t_test()
         {
             // int
@@ -503,7 +503,7 @@ namespace UnitTests
             Assert.IsTrue((new mp_size_t(8)) != (new mp_size_t(9)));
         }
 
-        [TestMethod]
+        [Test]
         public void size_t_test()
         {
             // ulong
@@ -566,7 +566,7 @@ namespace UnitTests
             Assert.IsTrue((new size_t(8)) != (new size_t(9)));
         }
 
-        [TestMethod]
+        [Test]
         public void void_ptr_test()
         {
             // Set block pointer to zero.
@@ -594,7 +594,7 @@ namespace UnitTests
             gmp_lib.free(t);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_t_test()
         {
             // Create new multiple-precision integers.
@@ -612,7 +612,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, result, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_t_test()
         {
             // Create new multiple-precision rationals.
@@ -630,7 +630,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x, y, z, result, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_t_test()
         {
             // Set default precision to 84 bits.
@@ -651,7 +651,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, z, result, null);
         }
 
-        [TestMethod]
+        [Test]
         public void va_list()
         {
             object[] args;
@@ -747,28 +747,28 @@ namespace UnitTests
 
         #region "Global variables."
 
-        [TestMethod]
+        [Test]
         public void mp_bits_per_limb()
         {
             int bitsPerLimb = gmp_lib.mp_bits_per_limb;
             Assert.AreEqual(bitsPerLimb, IntPtr.Size * 8);
         }
 
-        [TestMethod]
+        [Test]
         public void mp_bytes_per_limb()
         {
             mp_size_t bytesPerLimb = gmp_lib.mp_bytes_per_limb;
             Assert.AreEqual(bytesPerLimb, (mp_size_t)IntPtr.Size);
         }
 
-        [TestMethod]
+        [Test]
         public void mp_uint_per_limb()
         {
             mp_size_t uintsPerLimb = gmp_lib.mp_uint_per_limb;
             Assert.AreEqual(uintsPerLimb, (mp_size_t)(IntPtr.Size / 4));
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_errno()
         {
             int errno = gmp_lib.gmp_errno;
@@ -778,7 +778,7 @@ namespace UnitTests
             Assert.AreEqual(errno, 100);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_version()
         {
             string version = gmp_lib.gmp_version;
@@ -789,8 +789,8 @@ namespace UnitTests
 
         #region "Memory allocation functions."
 
-        [TestMethod]
-        [TestCategory("Memory allocation functions")]
+        [Test]
+        [Category("Memory allocation functions")]
         public void mp_get_memory_functions()
         {
             allocate_function allocate;
@@ -807,8 +807,8 @@ namespace UnitTests
             free(p, 100);
         }
 
-        [TestMethod]
-        [Ignore("Faulty test breaking library functions for other tests")]
+        [Test(Description = "This test need to run first based on gmp spec.")]
+        [Order(1)]
         public void mp_set_memory_functions()
         {
             // Retrieve GMP default memory allocation functions.
@@ -848,7 +848,7 @@ namespace UnitTests
 
         #region "Random number routines."
 
-        [TestMethod]
+        [Test]
         public void gmp_randinit_default()
         {
             // Create new random number generator state.
@@ -861,7 +861,7 @@ namespace UnitTests
             gmp_lib.gmp_randclear(state);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randinit_lc_2exp()
         {
             // Create new random number generator state.
@@ -877,7 +877,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(a);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randinit_lc_2exp_size()
         {
             // Create new random number generator state.
@@ -890,7 +890,7 @@ namespace UnitTests
             gmp_lib.gmp_randclear(state);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randinit_mt()
         {
             // Create new random number generator state.
@@ -903,7 +903,7 @@ namespace UnitTests
             gmp_lib.gmp_randclear(state);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randinit_set()
         {
             // Create new random number generator state, and initialize state with the Mersenne Twister algorithm.
@@ -919,7 +919,7 @@ namespace UnitTests
             gmp_lib.gmp_randclear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randseed()
         {
             // Create new random number generator state, and initialize state with the Mersenne Twister algorithm.
@@ -936,7 +936,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(seed);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_randseed_ui()
         {
             // Create new random number generator state, and initialize state with the Mersenne Twister algorithm.
@@ -950,7 +950,7 @@ namespace UnitTests
             gmp_lib.gmp_randclear(state);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_urandomb_ui()
         {
             // Create, initialize, and seed a new random number generator.
@@ -965,7 +965,7 @@ namespace UnitTests
             gmp_lib.gmp_randclear(state);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_urandomm_ui()
         {
             // Create, initialize, and seed a new random number generator.
@@ -984,7 +984,7 @@ namespace UnitTests
 
         #region "Formatted output routines."
 
-        [TestMethod]
+        [Test]
         public void gmp_asprintf()
         {
             // Create pointer to unmanaged character string pointer.
@@ -1150,7 +1150,7 @@ namespace UnitTests
             gmp_lib.free(str.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_vasprintf()
         {
             ptr<char_ptr> str = new ptr<char_ptr>();
@@ -1310,7 +1310,7 @@ namespace UnitTests
             gmp_lib.free(str.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_fprintf()
         {
             // Create unique file pathname and a file pointer.
@@ -1526,7 +1526,7 @@ namespace UnitTests
             fclose(stream.Value.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_vfprintf()
         {
             string pathname = System.IO.Path.GetTempFileName();
@@ -1763,7 +1763,7 @@ namespace UnitTests
             fclose(stream.Value.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_snprintf()
         {
             // Allocate unmanaged string with 50 characters.
@@ -1887,7 +1887,7 @@ namespace UnitTests
             gmp_lib.free(str);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_vsnprintf()
         {
             char_ptr str = new char_ptr(".........................................");
@@ -2005,7 +2005,7 @@ namespace UnitTests
             gmp_lib.free(str);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_sprintf()
         {
             // Allocate unmanaged string with 50 characters.
@@ -2129,7 +2129,7 @@ namespace UnitTests
             gmp_lib.free(str);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_vsprintf()
         {
             // Create string.
@@ -2253,7 +2253,7 @@ namespace UnitTests
 
         #region "Formatted input routines."
 
-        [TestMethod]
+        [Test]
         public void gmp_fscanf()
         {
             // Create unique filename and stream pointer.
@@ -2489,7 +2489,7 @@ namespace UnitTests
             System.IO.File.Delete(pathname);
         }
 
-        [TestMethod]
+        [Test]
         public void gmp_sscanf()
         {
             mpz_t z = "0";
@@ -2610,7 +2610,7 @@ namespace UnitTests
 
         #region "Integer (i.e. Z) routines."
 
-        [TestMethod]
+        [Test]
         public void _mpz_realloc()
         {
             // Create and initialize new integer x.
@@ -2636,7 +2636,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_abs()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -2657,7 +2657,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_add()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -2682,7 +2682,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_add_ui()
         {
             // Create, initialize, and set the value of x to 0.
@@ -2700,7 +2700,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_addmul()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -2725,7 +2725,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_addmul_ui()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -2746,7 +2746,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_and()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -2771,7 +2771,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_bin_ui()
         {
             // Create, initialize, and set the value of n to 4.
@@ -2792,7 +2792,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, rop, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_bin_uiui()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -2809,7 +2809,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_q()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -2834,7 +2834,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_q_2exp()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -2855,7 +2855,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_q_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -2875,7 +2875,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_qr()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -2902,7 +2902,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, q, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_qr_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -2925,7 +2925,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_r()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -2950,7 +2950,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_r_2exp()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -2971,7 +2971,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_r_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -2992,7 +2992,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cdiv_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3006,7 +3006,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(n);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_clear()
         {
             // Create and initialize a new integer x.
@@ -3020,7 +3020,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_clears()
         {
             // Create new integers x1, x2 and x3.
@@ -3040,7 +3040,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x1, x2, x3, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_clrbit()
         {
             // Create, initialize, and set the value of rop to 70.
@@ -3057,7 +3057,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmp()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3075,7 +3075,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmp_d()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3089,7 +3089,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmp_si()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3103,7 +3103,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmp_ui()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3117,7 +3117,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmpabs()
         {
             // Create, initialize, and set the value of op1 to -63.
@@ -3135,7 +3135,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmpabs_d()
         {
             // Create, initialize, and set the value of op1 to -63.
@@ -3149,7 +3149,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_cmpabs_ui()
         {
             // Create, initialize, and set the value of op1 to -63.
@@ -3163,7 +3163,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_com()
         {
             // Create, initialize, and set the value of op to 63.
@@ -3184,7 +3184,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_combit()
         {
             // Create, initialize, and set the value of rop to 70.
@@ -3201,7 +3201,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_congruent_p()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3223,7 +3223,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, c, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_congruent_2exp_p()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -3241,7 +3241,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, c, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_congruent_ui_p()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3255,7 +3255,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(n);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_divexact()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -3280,7 +3280,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_divexact_ui()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -3301,7 +3301,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_divisible_p()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -3319,7 +3319,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_divisible_ui_p()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -3333,7 +3333,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_divisible_2exp_p()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -3346,7 +3346,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_even()
         {
             // Create, initialize, and set the value of op to 427295.
@@ -3361,7 +3361,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_export_2()
         {
             // Create, initialize, and set the value of op to 0x800000000000000000000001.
@@ -3396,7 +3396,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_export()
         {
             // Create, initialize, and set the value of op to 0x800000000000000000000001.
@@ -3431,7 +3431,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fac_ui()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -3448,7 +3448,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_2fac_ui()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -3465,7 +3465,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mfac_uiui()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -3482,7 +3482,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_primorial_ui()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -3499,7 +3499,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_q()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3524,7 +3524,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_q_2exp()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -3545,7 +3545,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_q_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3565,7 +3565,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_qr()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3592,7 +3592,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, q, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_qr_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3615,7 +3615,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_r()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3640,7 +3640,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_r_2exp()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -3661,7 +3661,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_r_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3682,7 +3682,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fdiv_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -3696,7 +3696,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(n);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fib_ui()
         {
             // Create, initialize, and set the value of fn to 0.
@@ -3713,7 +3713,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(fn);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fib2_ui()
         {
             // Create, initialize, and set the values of fn and fnsub1 to 0.
@@ -3732,7 +3732,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(fn, fnsub1, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fits_sint_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -3746,7 +3746,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fits_slong_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -3760,7 +3760,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fits_sshort_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -3774,7 +3774,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fits_uint_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -3788,7 +3788,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fits_ulong_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -3802,7 +3802,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_fits_ushort_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -3816,7 +3816,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_gcd()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3841,7 +3841,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_gcd_ui()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3855,7 +3855,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_gcdext()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -3884,7 +3884,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(g, s, t, a, b, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_get_d()
         {
             // Create, initialize, and set the value of x to 10.
@@ -3898,7 +3898,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_get_d_2exp()
         {
             // Create, initialize, and set the value of x to 2^20.
@@ -3916,7 +3916,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_get_si()
         {
             // Create, initialize, and set the value of x to -10.
@@ -3930,7 +3930,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_get_str()
         {
             // Create, initialize, and set the value of x to -210.
@@ -3946,7 +3946,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_get_ui()
         {
             // Create, initialize, and set the value of x to 10.
@@ -3960,7 +3960,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_getlimbn()
         {
             // Create and initialize new integer x.
@@ -3986,7 +3986,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_hamdist()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -4004,7 +4004,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_import()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -4028,7 +4028,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init()
         {
             // Create and initialize a new integer x.
@@ -4044,7 +4044,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init2()
         {
             // Create a new integer x, and initialize its size to 300 bits.
@@ -4058,7 +4058,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_inits()
         {
             // Create new integers x1, x2 and x3.
@@ -4078,7 +4078,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x1, x2, x3, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init_set()
         {
             // Create, initialize, and set a new integer y to -210.
@@ -4097,7 +4097,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init_set_d()
         {
             // Create, initialize, and set the value of x to the truncation of 10.7.
@@ -4111,7 +4111,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init_set_si()
         {
             // Create, initialize, and set the value of x to 10.
@@ -4125,7 +4125,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init_set_str()
         {
             // Create, initialize, and set the value of x.
@@ -4143,7 +4143,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_init_set_ui()
         {
             // Create, initialize, and set the value of x to 10.
@@ -4157,7 +4157,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_inp_raw()
         {
             // Create, initialize, and set the value of op to 123456.
@@ -4186,7 +4186,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_inp_str()
         {
             // Create and initialize op.
@@ -4213,7 +4213,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_invert()
         {
             // Create, initialize, and set the value of op1 to 3.
@@ -4238,7 +4238,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_ior()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -4263,7 +4263,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_jacobi()
         {
             // Create, initialize, and set the value of a to 11.
@@ -4281,7 +4281,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(a, b, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_kronecker()
         {
             // Create, initialize, and set the value of a to 15.
@@ -4299,7 +4299,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(a, b, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_kronecker_si()
         {
             // Create, initialize, and set the value of a to 15.
@@ -4313,7 +4313,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(a);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_kronecker_ui()
         {
             // Create, initialize, and set the value of a to 15.
@@ -4327,7 +4327,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(a);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_si_kronecker()
         {
             // Create, initialize, and set the value of b to 4.
@@ -4341,7 +4341,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(b);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_ui_kronecker()
         {
             // Create, initialize, and set the value of b to 4.
@@ -4355,7 +4355,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(b);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_lcm()
         {
             // Create, initialize, and set the value of op1 to 2.
@@ -4380,7 +4380,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_lcm_ui()
         {
             // Create, initialize, and set the value of op1 to 2.
@@ -4401,7 +4401,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_legendre()
         {
             // Create, initialize, and set the value of a to 20.
@@ -4419,7 +4419,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(a, p, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_lucnum_ui()
         {
             // Create, initialize, and set the value of ln to 0.
@@ -4436,7 +4436,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(ln);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_lucnum2_ui()
         {
             // Create, initialize, and set the values of lnsub1 and ln to 0.
@@ -4455,7 +4455,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(ln, lnsub1, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_millerrabin()
         {
             // Create, initialize, and set the value of n to 12.
@@ -4469,7 +4469,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(n);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mod()
         {
             // Create, initialize, and set the value of x to 12222.
@@ -4494,7 +4494,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mod_ui()
         {
             // Create, initialize, and set the value of x to 12222.
@@ -4515,7 +4515,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mul()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -4540,7 +4540,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mul_2exp()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -4561,7 +4561,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mul_si()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -4582,7 +4582,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_mul_ui()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -4603,7 +4603,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_neg()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -4624,7 +4624,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_nextprime()
         {
             // Create, initialize, and set the value of n to 12.
@@ -4645,7 +4645,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_odd()
         {
             // Create, initialize, and set the value of op to 427294.
@@ -4660,7 +4660,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_out_raw()
         {
             // Create, initialize, and set the value of op to 123456 (0x1E240).
@@ -4697,7 +4697,7 @@ namespace UnitTests
         [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
         public static extern Int32 fclose(IntPtr stream);
 
-        [TestMethod]
+        [Test]
         public void mpz_out_str()
         {
             // Create, initialize, and set the value of op to 123456.
@@ -4728,7 +4728,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_perfect_power_p()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -4742,7 +4742,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_perfect_square_p()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -4756,7 +4756,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_popcount()
         {
             // Create, initialize, and set the value of op to 63.
@@ -4770,7 +4770,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_pow_ui()
         {
             // Create, initialize, and set the value of base to 2.
@@ -4791,7 +4791,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, @base, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_powm()
         {
             // Create, initialize, and set the value of base to 2.
@@ -4820,7 +4820,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, @base, exp, mod, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_powm_sec()
         {
             // Create, initialize, and set the value of base to 2.
@@ -4849,7 +4849,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, @base, exp, mod, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_powm_ui()
         {
             // Create, initialize, and set the value of base to 2.
@@ -4873,7 +4873,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, @base, mod, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_probab_prime_p()
         {
             // Create, initialize, and set the value of n to 12.
@@ -4887,7 +4887,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(n);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_random()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -4901,7 +4901,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_random2()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -4915,7 +4915,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_realloc2()
         {
             // Create and initialize new integer x.
@@ -4941,7 +4941,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_remove()
         {
             // Create, initialize, and set the value of op to 45.
@@ -4966,7 +4966,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op, f, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_root()
         {
             // Create, initialize, and set the value of op to 10000.
@@ -4987,7 +4987,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_rootrem()
         {
             // Create, initialize, and set the value of u to 10000.
@@ -5010,7 +5010,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(root, rem, u, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_rrandomb()
         {
             // Create, initialize, and seed a new random number generator.
@@ -5030,7 +5030,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_scan0()
         {
             // Create, initialize, and set the value of op to 70.
@@ -5044,7 +5044,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_scan1()
         {
             // Create, initialize, and set the value of op to 70.
@@ -5058,7 +5058,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set()
         {
             // Create, initialize, and set a new integer x to 10.
@@ -5081,7 +5081,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set_d()
         {
             // Create and initialize a new integer x.
@@ -5098,7 +5098,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set_f()
         {
             // Create and initialize new integer x, and float y.
@@ -5117,7 +5117,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set_q()
         {
             // Create and initialize new integer x, and rational y.
@@ -5136,7 +5136,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set_si()
         {
             // Create and initialize a new integer x.
@@ -5153,7 +5153,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set_str()
         {
             // Create and initialize a new integer x.
@@ -5174,7 +5174,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_set_ui()
         {
             // Create and initialize a new integer x.
@@ -5191,7 +5191,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_setbit()
         {
             // Create, initialize, and set the value of rop to 70.
@@ -5208,7 +5208,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_sgn()
         {
             // Create, initialize, and set the value of op to -10.
@@ -5222,7 +5222,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_size()
         {
             // Create and initialize new integer x.
@@ -5241,7 +5241,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_sizeinbase()
         {
             // Create, initialize, and set the value of op to 10000.
@@ -5258,7 +5258,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_sqrt()
         {
             // Create, initialize, and set the value of op to 10000.
@@ -5279,7 +5279,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_sqrtrem()
         {
             // Create, initialize, and set the value of op to 10000.
@@ -5302,7 +5302,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(root, rem, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_sub()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -5327,7 +5327,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_sub_ui()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -5348,7 +5348,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_ui_sub()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -5369,7 +5369,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_submul()
         {
             // Create, initialize, and set the value of x to 10000.
@@ -5394,7 +5394,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_submul_ui()
         {
             // Create, initialize, and set the value of x to -10000.
@@ -5415,7 +5415,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_swap()
         {
             // Create, initialize, and set a new integer x to 10.
@@ -5437,7 +5437,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_q()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5462,7 +5462,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_q_2exp()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -5483,7 +5483,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_q_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5503,7 +5503,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_qr()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5530,7 +5530,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, q, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_qr_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5553,7 +5553,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, q, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_r()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5578,7 +5578,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, d, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_r_2exp()
         {
             // Create, initialize, and set the value of n to 10001.
@@ -5599,7 +5599,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_r_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5620,7 +5620,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(n, r, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tdiv_ui()
         {
             // Create, initialize, and set the value of n to 10000.
@@ -5634,7 +5634,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(n);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_tstbit()
         {
             // Create, initialize, and set the value of rop to 70.
@@ -5648,7 +5648,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_ui_pow_ui()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -5665,7 +5665,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_urandomb()
         {
             // Create, initialize, and seed a new random number generator.
@@ -5685,7 +5685,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_urandomm()
         {
             // Create, initialize, and seed a new random number generator.
@@ -5710,7 +5710,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, n, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_xor()
         {
             // Create, initialize, and set the value of op1 to 63.
@@ -5735,7 +5735,7 @@ namespace UnitTests
             gmp_lib.mpz_clears(rop, op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_limbs_read()
         {
             // Create and initialize new integer x.
@@ -5758,7 +5758,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_limbs_write()
         {
             // Create and initialize new integer x.
@@ -5784,7 +5784,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_limbs_modify()
         {
             // Create, initialize, and set the value of x to 2.
@@ -5809,7 +5809,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpz_roinit_n()
         {
             // Create and initialize new integer x.
@@ -5839,7 +5839,7 @@ namespace UnitTests
 
         #region "Rational (i.e. Q) routines."
 
-        [TestMethod]
+        [Test]
         public void mpq_abs()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -5861,7 +5861,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_add()
         {
             // Create, initialize, and set the value of x to 1 / 2.
@@ -5888,7 +5888,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_canonicalize()
         {
             // Create, initialize, and set a new rational to 10 / 20.
@@ -5906,7 +5906,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_clear()
         {
             // Create and initialize a new rational x.
@@ -5920,7 +5920,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_clears()
         {
             // Create new rationals x1, x2 and x3.
@@ -5940,7 +5940,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x1, x2, x3, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_cmp()
         {
             // Create, initialize, and set the value of op1 to 1 / 2.
@@ -5960,7 +5960,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_cmp_si()
         {
             // Create, initialize, and set the value of op1 to 1 / 2.
@@ -5975,7 +5975,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_cmp_ui()
         {
             // Create, initialize, and set the value of op1 to 1 / 2.
@@ -5990,7 +5990,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op1);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_cmp_z()
         {
             // Create, initialize, and set the value of op1 to 1 / 2.
@@ -6011,7 +6011,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(op2);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_denref()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6030,7 +6030,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_div()
         {
             // Create, initialize, and set the value of n to 1 / 2.
@@ -6057,7 +6057,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(n, d, q, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_div_2exp()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6079,7 +6079,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_equal()
         {
             // Create, initialize, and set the value of op1 to 1 / 2.
@@ -6099,7 +6099,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(op1, op2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_get_num()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6124,7 +6124,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(num);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_get_den()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6149,7 +6149,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(den);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_get_d()
         {
             // Create, initialize, and set the value of x to 10 / 11.
@@ -6164,7 +6164,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_get_str()
         {
             // Create, initialize, and set the value of x to -210 / 13.
@@ -6181,7 +6181,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_init()
         {
             // Create and initialize a new rational x.
@@ -6197,7 +6197,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_inits()
         {
             // Create new rationals x1, x2 and x3.
@@ -6217,7 +6217,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x1, x2, x3, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_inp_str()
         {
             // Create, initialize, and set the value of op to 123/456.
@@ -6244,7 +6244,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_inv()
         {
             // Create, initialize, and set the value of number to -1 / 3.
@@ -6266,7 +6266,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(inverted_number, number, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_mul()
         {
             // Create, initialize, and set the value of x to 1 / 2.
@@ -6293,7 +6293,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_mul_2exp()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6315,7 +6315,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(rop, op, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_neg()
         {
             // Create, initialize, and set the value of operand to -1 / 3.
@@ -6337,7 +6337,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(negated_operand, operand, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_numref()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6356,7 +6356,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_out_str()
         {
             // Create, initialize, and set the value of op to 123/456.
@@ -6388,7 +6388,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set()
         {
             // Create, initialize, and set a new rational x to 10 / 11.
@@ -6411,7 +6411,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_d()
         {
             // Create and initialize a new rational.
@@ -6428,7 +6428,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_den()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6451,7 +6451,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(den);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_f()
         {
             // Create, initialize, and set a new rational x to 10 / 11.
@@ -6475,7 +6475,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_num()
         {
             // Create, initialize, and set the value of op to -1 / 3.
@@ -6498,7 +6498,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(num);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_si()
         {
             // Create and initialize a new rational x.
@@ -6515,7 +6515,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_str()
         {
             // Create and initialize a new rational x.
@@ -6536,7 +6536,7 @@ namespace UnitTests
             gmp_lib.free(s);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_ui()
         {
             // Create and initialize a new rational x.
@@ -6553,7 +6553,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_set_z()
         {
             // Create, initialize, and set a new rational x to 10 / 11.
@@ -6577,7 +6577,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_sgn()
         {
             // Create, initialize, and set a new rational x to -10 / 11.
@@ -6592,7 +6592,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_sub()
         {
             // Create, initialize, and set the value of x to 1 / 2.
@@ -6619,7 +6619,7 @@ namespace UnitTests
             gmp_lib.mpq_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpq_swap()
         {
             // Create, initialize, and set a new rational x to 10 / 11.
@@ -6647,7 +6647,7 @@ namespace UnitTests
 
         #region "Float (i.e. F) routines."
 
-        [TestMethod]
+        [Test]
         public void mpf_abs()
         {
             // Set default precision to 64 bits.
@@ -6671,7 +6671,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_add()
         {
             // Set default precision to 64 bits.
@@ -6699,7 +6699,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_add_ui()
         {
             // Set default precision to 64 bits.
@@ -6723,7 +6723,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_ceil()
         {
             // Set default precision to 64 bits.
@@ -6747,7 +6747,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_clear()
         {
             // Set default precision to 64 bits.
@@ -6764,7 +6764,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_clears()
         {
             // Create new floating-point numbers x1, x2 and x3.
@@ -6784,7 +6784,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x1, x2, x3, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_cmp()
         {
             // Set default precision to 64 bits.
@@ -6805,7 +6805,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_cmp_z()
         {
             // Set default precision to 64 bits.
@@ -6827,7 +6827,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(z);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_cmp_d()
         {
             // Set default precision to 64 bits.
@@ -6844,7 +6844,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_cmp_si()
         {
             // Set default precision to 64 bits.
@@ -6861,7 +6861,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_cmp_ui()
         {
             // Set default precision to 64 bits.
@@ -6878,7 +6878,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_div()
         {
             // Set default precision to 64 bits.
@@ -6906,7 +6906,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_div_2exp()
         {
             // Set default precision to 64 bits.
@@ -6930,7 +6930,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_div_ui()
         {
             // Set default precision to 64 bits.
@@ -6954,7 +6954,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_fits_sint_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -6968,7 +6968,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_fits_slong_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -6982,7 +6982,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_fits_sshort_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -6996,7 +6996,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_fits_uint_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -7010,7 +7010,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_fits_ulong_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -7024,7 +7024,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_fits_ushort_p()
         {
             // Create, initialize, and set the value of op 4294967295.
@@ -7038,7 +7038,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_floor()
         {
             // Set default precision to 64 bits.
@@ -7062,7 +7062,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_d()
         {
             // Set default precision to 64 bits.
@@ -7079,7 +7079,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_d_2exp()
         {
             // Set default precision to 64 bits.
@@ -7098,7 +7098,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_default_prec()
         {
             // Set default precision to 128 bits.
@@ -7108,7 +7108,7 @@ namespace UnitTests
             Assert.IsTrue(gmp_lib.mpf_get_default_prec() == 128U);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_prec()
         {
             // Create and initialize a new floating-point number x with 64-bit precision.
@@ -7123,7 +7123,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_si()
         {
             // Set default precision to 64 bits.
@@ -7140,7 +7140,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_str()
         {
             // Set default precision to 64 bits.
@@ -7161,7 +7161,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_str_2()
         {
             // Set default precision to 64 bits.
@@ -7182,7 +7182,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_get_ui()
         {
             // Set default precision to 64 bits.
@@ -7199,7 +7199,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init()
         {
             // Set default precision to 64 bits.
@@ -7216,7 +7216,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init2()
         {
             // Create and initialize a new floating-point number x with 64-bit precision.
@@ -7232,7 +7232,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_inits()
         {
             // Create new floating-point numbers x1, x2 and x3.
@@ -7252,7 +7252,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x1, x2, x3, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init_set()
         {
             // Set default precision to 64 bits.
@@ -7273,7 +7273,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init_set_d()
         {
             // Set default precision to 64 bits.
@@ -7290,7 +7290,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init_set_si()
         {
             // Set default precision to 64 bits.
@@ -7307,7 +7307,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init_set_str()
         {
             // Set default precision to 64 bits.
@@ -7326,7 +7326,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_init_set_ui()
         {
             // Set default precision to 64 bits.
@@ -7343,7 +7343,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_inp_str()
         {
             // Create and initialize op.
@@ -7370,7 +7370,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_integer_p()
         {
             // Set default precision to 64 bits.
@@ -7387,7 +7387,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_mul()
         {
             // Set default precision to 64 bits.
@@ -7415,7 +7415,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_mul_2exp()
         {
             // Set default precision to 64 bits.
@@ -7439,7 +7439,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_mul_ui()
         {
             // Set default precision to 64 bits.
@@ -7463,7 +7463,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_neg()
         {
             // Set default precision to 64 bits.
@@ -7487,7 +7487,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_out_str()
         {
             // Create, initialize, and set the value of op to 123456.
@@ -7518,7 +7518,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_pow_ui()
         {
             // Set default precision to 64 bits.
@@ -7542,7 +7542,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_random2()
         {
             // Create, initialize, and set the value of rop to 0.
@@ -7556,7 +7556,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(rop);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_reldiff()
         {
             // Set default precision to 64 bits.
@@ -7584,7 +7584,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set()
         {
             // Create, initialize, and set a new floating-point number x to 10.
@@ -7607,7 +7607,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_d()
         {
             // Create and initialize a new floating-point number.
@@ -7624,7 +7624,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_default_prec()
         {
             // Set default precision to 128 bits.
@@ -7634,7 +7634,7 @@ namespace UnitTests
             Assert.IsTrue(gmp_lib.mpf_get_default_prec() == 128U);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_prec()
         {
             // Create and initialize a new floating-point number x.
@@ -7652,7 +7652,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_prec_raw()
         {
             // Set default precision to 128 bits.
@@ -7685,7 +7685,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_q()
         {
             // Create, initialize, and set a new rational y to 200 / 5.
@@ -7706,7 +7706,7 @@ namespace UnitTests
             gmp_lib.mpq_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_si()
         {
             // Create and initialize a new floating-point number.
@@ -7723,7 +7723,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_str()
         {
             // Create, initialize, and set a new floating-point number x to 0.0234.
@@ -7740,7 +7740,7 @@ namespace UnitTests
             gmp_lib.free(value);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_ui()
         {
             // Create and initialize a new floating-point number.
@@ -7757,7 +7757,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_set_z()
         {
             // Create, initialize, and set a new integer y to 200.
@@ -7778,7 +7778,7 @@ namespace UnitTests
             gmp_lib.mpz_clear(y);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_sgn()
         {
             // Create, initialize, and set the value of op to -10.
@@ -7792,7 +7792,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(op);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_size()
         {
             // Set default precision to 64 bits.
@@ -7808,7 +7808,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(x);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_sqrt()
         {
             // Set default precision to 64 bits.
@@ -7832,7 +7832,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_sqrt_ui()
         {
             // Set default precision to 64 bits.
@@ -7852,7 +7852,7 @@ namespace UnitTests
             gmp_lib.mpf_clear(z);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_sub()
         {
             // Set default precision to 64 bits.
@@ -7880,7 +7880,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_sub_ui()
         {
             // Set default precision to 64 bits.
@@ -7904,7 +7904,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_swap()
         {
             // Create, initialize, and set a new floating-point number x to 10.
@@ -7930,7 +7930,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, y, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_trunc()
         {
             // Set default precision to 64 bits.
@@ -7954,7 +7954,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_ui_div()
         {
             // Set default precision to 64 bits.
@@ -7978,7 +7978,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(x, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_ui_sub()
         {
             // Set default precision to 64 bits.
@@ -8002,7 +8002,7 @@ namespace UnitTests
             gmp_lib.mpf_clears(y, z, null);
         }
 
-        [TestMethod]
+        [Test]
         public void mpf_urandomb()
         {
             // Create, initialize, and seed a new random number generator.
@@ -8026,7 +8026,7 @@ namespace UnitTests
 
         #region "Low level positive-integer (i.e. N) routines."
 
-        [TestMethod]
+        [Test]
         public void mpn_add()
         {
             // Create multi-precision operands, and expected result.
@@ -8046,7 +8046,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_add_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8065,7 +8065,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_add_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8085,7 +8085,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_addmul_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8104,7 +8104,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_cmp()
         {
             // Create multi-precision operands, and expected result.
@@ -8118,7 +8118,7 @@ namespace UnitTests
             gmp_lib.free(s1p, s2p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_zero_p()
         {
             // Create multi-precision operand.
@@ -8131,7 +8131,7 @@ namespace UnitTests
             gmp_lib.free(sp);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_divexact_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8149,7 +8149,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_divexact_by3()
         {
             // Create multi-precision operands, and expected result.
@@ -8168,7 +8168,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_divexact_by3c()
         {
             // Create multi-precision operands, and expected result.
@@ -8187,7 +8187,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_divrem_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8206,7 +8206,7 @@ namespace UnitTests
             gmp_lib.free(r1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_divmod_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8225,7 +8225,7 @@ namespace UnitTests
             gmp_lib.free(r1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_gcd()
         {
             // Create multi-precision operands, and expected result.
@@ -8245,7 +8245,7 @@ namespace UnitTests
             gmp_lib.free(rp, xp, yp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_gcd_1()
         {
             // Create multi-precision operand.
@@ -8258,7 +8258,7 @@ namespace UnitTests
             gmp_lib.free(xp);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_gcdext()
         {
             // Create multi-precision operands, and expected result.
@@ -8283,7 +8283,7 @@ namespace UnitTests
             gmp_lib.free(gp, up, vp, sp, result, cofactor);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_gcdext_2()
         {
             // Create multi-precision operands, and expected result.
@@ -8308,7 +8308,7 @@ namespace UnitTests
             gmp_lib.free(gp, up, vp, sp, result, cofactor);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_get_str()
         {
             // Create multi-precision operands.
@@ -8330,7 +8330,7 @@ namespace UnitTests
             gmp_lib.free(str);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_hamdist()
         {
             // Create multi-precision operands.
@@ -8344,7 +8344,7 @@ namespace UnitTests
             gmp_lib.free(s1p, s2p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_lshift()
         {
             // Create multi-precision operands, and expected result.
@@ -8363,7 +8363,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_mod_1()
         {
             // Create multi-precision operand.
@@ -8376,7 +8376,7 @@ namespace UnitTests
             gmp_lib.free(s1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_mul()
         {
             // Create multi-precision operands, and expected result.
@@ -8395,7 +8395,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_mul_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8414,7 +8414,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_mul_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8433,7 +8433,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sqr()
         {
             // Create multi-precision operands, and expected result.
@@ -8451,7 +8451,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_neg()
         {
             // Create multi-precision operands, and expected result.
@@ -8470,7 +8470,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_com()
         {
             // Create multi-precision operands, and expected result.
@@ -8488,7 +8488,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_perfect_square_p()
         {
             // Create multi-precision operand.
@@ -8501,7 +8501,7 @@ namespace UnitTests
             gmp_lib.free(s1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_perfect_power_p()
         {
             // Create multi-precision operand.
@@ -8514,7 +8514,7 @@ namespace UnitTests
             gmp_lib.free(s1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_popcount()
         {
             // Create multi-precision operand.
@@ -8527,7 +8527,7 @@ namespace UnitTests
             gmp_lib.free(s1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_random()
         {
             // Create multi-precision operand.
@@ -8540,7 +8540,7 @@ namespace UnitTests
             gmp_lib.free(r1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_random2()
         {
             // Create multi-precision operand.
@@ -8553,7 +8553,7 @@ namespace UnitTests
             gmp_lib.free(r1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_rshift()
         {
             // Create multi-precision operands, and expected result.
@@ -8572,7 +8572,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_scan0()
         {
             // Create multi-precision operand.
@@ -8585,7 +8585,7 @@ namespace UnitTests
             gmp_lib.free(s1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_scan1()
         {
             // Create multi-precision operand.
@@ -8598,7 +8598,7 @@ namespace UnitTests
             gmp_lib.free(s1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_set_str()
         {
             // Create multi-precision operands.
@@ -8620,7 +8620,7 @@ namespace UnitTests
             gmp_lib.free(str);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sizeinbase()
         {
             // Create multi-precision operands, and expected result.
@@ -8633,7 +8633,7 @@ namespace UnitTests
             gmp_lib.free(xp);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sqrtrem()
         {
             // Create multi-precision operands, and expected result.
@@ -8655,7 +8655,7 @@ namespace UnitTests
             gmp_lib.free(sp, r1p, r2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sub()
         {
             // Create multi-precision operands, and expected result.
@@ -8675,7 +8675,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sub_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8694,7 +8694,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sub_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8714,7 +8714,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_submul_1()
         {
             // Create multi-precision operands, and expected result.
@@ -8733,7 +8733,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_tdiv_qr()
         {
             // Create multi-precision operands, and expected result.
@@ -8755,7 +8755,7 @@ namespace UnitTests
             gmp_lib.free(qp, rp, np, dp, quotient, remainder);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_and_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8774,7 +8774,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_andn_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8793,7 +8793,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_nand_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8812,7 +8812,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_ior_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8831,7 +8831,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_iorn_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8850,7 +8850,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_nior_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8869,7 +8869,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_xor_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8888,7 +8888,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_xnor_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8907,7 +8907,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_copyi()
         {
             // Create multi-precision operands, and expected result.
@@ -8925,7 +8925,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_copyd()
         {
             // Create multi-precision operands, and expected result.
@@ -8943,7 +8943,7 @@ namespace UnitTests
             gmp_lib.free(rp, sp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_zero()
         {
             // Create multi-precision operand, and expected result.
@@ -8960,7 +8960,7 @@ namespace UnitTests
             gmp_lib.free(rp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_cnd_add_n()
         {
             // Create multi-precision operands, and expected result.
@@ -8980,7 +8980,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_cnd_sub_n()
         {
             // Create multi-precision operands, and expected result.
@@ -9000,7 +9000,7 @@ namespace UnitTests
             gmp_lib.free(rp, s1p, s2p, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_add_1()
         {
             // Create multi-precision operands, and expected result.
@@ -9023,7 +9023,7 @@ namespace UnitTests
             gmp_lib.free(rp, ap, tp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_sub_1()
         {
             // Create multi-precision operands, and expected result.
@@ -9046,7 +9046,7 @@ namespace UnitTests
             gmp_lib.free(rp, ap, tp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_cnd_swap()
         {
             // Create multi-precision operands, and expected result.
@@ -9066,7 +9066,7 @@ namespace UnitTests
             gmp_lib.free(ap, bp, a1p, b1p);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_mul()
         {
             // Create multi-precision operands, and expected result.
@@ -9089,7 +9089,7 @@ namespace UnitTests
             gmp_lib.free(rp, ap, bp, tp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_sqr()
         {
             // Create multi-precision operands, and expected result.
@@ -9111,7 +9111,7 @@ namespace UnitTests
             gmp_lib.free(rp, ap, tp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_powm()
         {
             // Create multi-precision operands, and expected result.
@@ -9135,7 +9135,7 @@ namespace UnitTests
             gmp_lib.free(rp, bp, ep, mp, tp, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_tabselect()
         {
             // Create multi-precision operands, and expected result.
@@ -9153,7 +9153,7 @@ namespace UnitTests
             gmp_lib.free(tab, result);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_div_qr()
         {
             // Create multi-precision operands, and expected result.
@@ -9178,7 +9178,7 @@ namespace UnitTests
             gmp_lib.free(qp, np, dp, remainder, tp);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_div_r()
         {
             // Create multi-precision operands, and expected result.
@@ -9199,7 +9199,7 @@ namespace UnitTests
             gmp_lib.free(np, dp, tp);
         }
 
-        [TestMethod]
+        [Test]
         public void mpn_sec_invert()
         {
             // Create multi-precision operands, and expected result.
