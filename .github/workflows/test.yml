@@ -1,0 +1,35 @@
+name: Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/test.yml'
+      - 'MathGmp.Native.*/**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    env:
+      BUILD_CONFIG: release
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Check out repository
+        uses: actions/checkout@v3
+    
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build MathGmp.Native
+        working-directory: MathGmp.Native
+        run: dotnet build -c ${{ env.BUILD_CONFIG }} --no-restore
+    
+      #- name: Test
+      #  working-directory: MathGmp.Native.UnitTests
+      #  run: dotnet test -c ${{ env.BUILD_CONFIG }} --no-restore
