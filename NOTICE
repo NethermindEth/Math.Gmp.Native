@@ -1,6 +1,10 @@
+This software is derived from GMP Native Interface for .NET Library
+(https://github.com/MachineCognitis/Math.Gmp.Native)
+covered by the following copyright and permission notice:
+
 MIT License
 
-Copyright (c) 2022 Demerzel Solutions Limited
+Copyright (c) 2017 Robert Baron, Machine Cognitis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
