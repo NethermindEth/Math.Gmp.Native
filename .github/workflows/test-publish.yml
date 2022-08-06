@@ -36,9 +36,9 @@ jobs:
         working-directory: MathGmp.Native
         run: dotnet build -c ${{ env.BUILD_CONFIG }} --no-restore -p:ContinuousIntegrationBuild=true
     
-      #- name: Test
-      #  working-directory: MathGmp.Native.UnitTests
-      #  run: dotnet test -c ${{ env.BUILD_CONFIG }} --no-restore
+      - name: Test
+        working-directory: MathGmp.Native.UnitTests
+        run: dotnet test -c ${{ env.BUILD_CONFIG }} --no-restore
 
       - name: Publish
         if: ${{ inputs.publish }}
