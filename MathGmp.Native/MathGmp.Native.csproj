@@ -13,7 +13,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <PackageId>Nethermind.Gmp</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/nethermindeth/math.gmp.native</PackageProjectUrl>
+    <PackageProjectUrl>https://nethermind.io</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/nethermindeth/math.gmp.native</RepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
