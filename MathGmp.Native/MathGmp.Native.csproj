@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Authors>Nethermind, Robert Baron</Authors>
-    <Copyright>Demerzel Solutions Limited, Robert Baron</Copyright>
+    <Authors>Nethermind</Authors>
+    <Copyright>Demerzel Solutions Limited</Copyright>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <PackageId>Nethermind.Gmp</PackageId>
