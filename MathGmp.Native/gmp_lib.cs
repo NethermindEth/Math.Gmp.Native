@@ -545,7 +545,7 @@ namespace MathGmp.Native
                 throw new PlatformNotSupportedException();
 
             // Load GMP library and create safe handle to it.
-            var handle = NativeLibrary.Load($"{LibGmp}{extension}", typeof(gmp_lib).Assembly, default);
+            var handle = NativeLibrary.Load($"runtimes/{RuntimeInformation.RuntimeIdentifier}/native/{LibGmp}{extension}", typeof(gmp_lib).Assembly, default);
 
             // Retrieve and cache GMP dynamic memory allocation functions.
             _get_memory_functions();
