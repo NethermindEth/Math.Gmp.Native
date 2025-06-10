@@ -515,7 +515,7 @@ namespace MathGmp.Native
     /// <item><description><see cref="ZeroMemory">ZeroMemory</see> - The <see cref="ZeroMemory">ZeroMemory</see> routine fills a block of memory with zeros, given a pointer to the block and the length, in bytes, to be filled.</description></item>
     /// </list>
     /// </remarks>
-    public static class gmp_lib
+    public static partial class gmp_lib
     {
         private const string LibGmp = @"libgmp";
 
@@ -23718,54 +23718,54 @@ namespace MathGmp.Native
         #endregion
 
         [SuppressUnmanagedCodeSecurity]
-        private static class SafeNativeMethods
+        private static partial class SafeNativeMethods
         {
 
             #region "Memory allocation functions."
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_get_memory_functions(ref IntPtr /*void*(**) (size_t)*/ alloc_func_ptr, ref IntPtr /*void*(**) (void*, size_t, size_t)*/ realloc_func_ptr, ref IntPtr /*void (**) (void*, size_t)*/ free_func_ptr);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_get_memory_functions(ref IntPtr /*void*(**) (size_t)*/ alloc_func_ptr, ref IntPtr /*void*(**) (void*, size_t, size_t)*/ realloc_func_ptr, ref IntPtr /*void (**) (void*, size_t)*/ free_func_ptr);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_set_memory_functions(IntPtr /*void*(*) (size_t)*/ alloc_func_ptr, IntPtr /*void*(*) (void*, size_t, size_t)*/ realloc_func_ptr, IntPtr /*void (*) (void*, size_t)*/ free_func_ptr);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_set_memory_functions(IntPtr /*void*(*) (size_t)*/ alloc_func_ptr, IntPtr /*void*(*) (void*, size_t, size_t)*/ realloc_func_ptr, IntPtr /*void (*) (void*, size_t)*/ free_func_ptr);
 
             #endregion
 
             #region "Random number routines."
 
             ///* obsolete */
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmp_randinit(IntPtr /*gmp_randstate_t*/, gmp_randalg_t, ...);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmp_randinit(IntPtr /*gmp_randstate_t*/, gmp_randalg_t, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randinit_default(IntPtr /*gmp_randstate_t*/ state);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randinit_default(IntPtr /*gmp_randstate_t*/ state);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randinit_lc_2exp(IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*mpz_t*/ a, uint /*unsigned long int*/ c, uint /*mp_bitcnt_t*/ m2exp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randinit_lc_2exp(IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*mpz_t*/ a, uint /*unsigned long int*/ c, uint /*mp_bitcnt_t*/ m2exp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_randinit_lc_2exp_size(IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ size);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_randinit_lc_2exp_size(IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ size);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randinit_mt(IntPtr /*gmp_randstate_t*/ state);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randinit_mt(IntPtr /*gmp_randstate_t*/ state);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randinit_set(IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*gmp_randstate_t*/ /*__gmp_randstate_struct **/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randinit_set(IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*gmp_randstate_t*/ /*__gmp_randstate_struct **/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randseed(IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*mpz_t*/ seed);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randseed(IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*mpz_t*/ seed);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randseed_ui(IntPtr /*gmp_randstate_t*/ state, uint /*unsigned long int*/ seed);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randseed_ui(IntPtr /*gmp_randstate_t*/ state, uint /*unsigned long int*/ seed);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmp_randclear(IntPtr /*gmp_randstate_t*/ state);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmp_randclear(IntPtr /*gmp_randstate_t*/ state);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmp_urandomb_ui(IntPtr /*gmp_randstate_t*/ state, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmp_urandomb_ui(IntPtr /*gmp_randstate_t*/ state, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmp_urandomm_ui(IntPtr /*gmp_randstate_t*/ state, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmp_urandomm_ui(IntPtr /*gmp_randstate_t*/ state, uint /*unsigned long int*/ n);
 
             #endregion
 
@@ -23798,23 +23798,23 @@ namespace MathGmp.Native
             //#define gmp_sprintf __gmp_sprintf
             //        __GMP_DECLSPEC int gmp_sprintf(char*, const char*, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vasprintf(ref IntPtr /*char ***/ pp, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vasprintf(ref IntPtr /*char ***/ pp, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vfprintf(IntPtr /*FILE **/ pp, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vfprintf(IntPtr /*FILE **/ pp, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vprintf(/*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vprintf(/*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmp_vsnprintf")]
-            public static extern int __gmp_vsnprintf_x86(IntPtr /*char **/ buf, uint /*size_t*/ size, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
+            [LibraryImport(LibGmp, EntryPoint = "__gmp_vsnprintf")]
+            public static partial int __gmp_vsnprintf_x86(IntPtr /*char **/ buf, uint /*size_t*/ size, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmp_vsnprintf")]
-            public static extern int __gmp_vsnprintf_x64(IntPtr /*char **/ buf, ulong /*size_t*/ size, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
+            [LibraryImport(LibGmp, EntryPoint = "__gmp_vsnprintf")]
+            public static partial int __gmp_vsnprintf_x64(IntPtr /*char **/ buf, ulong /*size_t*/ size, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vsprintf(IntPtr /*char **/ buf, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vsprintf(IntPtr /*char **/ buf, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ args);
 
             #endregion
 
@@ -23831,1180 +23831,1180 @@ namespace MathGmp.Native
             //#define gmp_sscanf __gmp_sscanf
             //        __GMP_DECLSPEC int gmp_sscanf(const char*, const char*, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vfscanf(IntPtr /*FILE **/ fp, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ ap);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vfscanf(IntPtr /*FILE **/ fp, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ ap);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vscanf(/*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ ap);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vscanf(/*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ ap);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmp_vsscanf(/*const*/ IntPtr /*char **/ s, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ ap);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmp_vsscanf(/*const*/ IntPtr /*char **/ s, /*const*/ IntPtr /*char **/ fmt, IntPtr /*va_list*/ ap);
 
             #endregion
 
             #region "Integer (i.e. Z) routines."
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void_ptr /*void **/ __gmpz_realloc(IntPtr /*mpz_t*/ integer, int /*mp_size_t*/ new_alloc);
+            [LibraryImport(LibGmp)]
+            public static partial void_ptr /*void **/ __gmpz_realloc(IntPtr /*mpz_t*/ integer, int /*mp_size_t*/ new_alloc);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_abs(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_abs(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_add(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_add(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_add_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_add_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_addmul(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_addmul(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_addmul_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_addmul_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_and(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_and(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            //[DllImport(LibGmp)] /* OBSOLETE */
-            //public static extern void __gmpz_array_init(IntPtr /*mpz_t*/ integer_array, int /*mp_size_t*/ array_size, int /*mp_size_t*/ fixed_num_bits);
+            //[LibraryImport(LibGmp)] /* OBSOLETE */
+            //public static partial void __gmpz_array_init(IntPtr /*mpz_t*/ integer_array, int /*mp_size_t*/ array_size, int /*mp_size_t*/ fixed_num_bits);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_bin_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ k);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_bin_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ k);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_bin_uiui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n, uint /*unsigned long int*/ k);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_bin_uiui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n, uint /*unsigned long int*/ k);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_cdiv_q(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_cdiv_q(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_cdiv_q_2exp(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_cdiv_q_2exp(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_cdiv_q_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_cdiv_q_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_cdiv_qr(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_cdiv_qr(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_cdiv_qr_ui(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_cdiv_qr_ui(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_cdiv_r(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_cdiv_r(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_cdiv_r_2exp(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_cdiv_r_2exp(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_cdiv_r_ui(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_cdiv_r_ui(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_cdiv_ui(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_cdiv_ui(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_clear(IntPtr /*mpz_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_clear(IntPtr /*mpz_t*/ x);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpz_clears(mpz_t[] x);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpz_clears(mpz_t[] x);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_clrbit(IntPtr /*mpz_t*/ rop, uint /*mp_bitcnt_t*/ bit_index);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_clrbit(IntPtr /*mpz_t*/ rop, uint /*mp_bitcnt_t*/ bit_index);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmp(/*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmp(/*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmp_d(/*const*/ IntPtr /*mpz_t*/ op1, double op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmp_d(/*const*/ IntPtr /*mpz_t*/ op1, double op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmp_si(/*const*/ IntPtr /*mpz_t*/ op1, int /*long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmp_si(/*const*/ IntPtr /*mpz_t*/ op1, int /*long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmp_ui(/*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmp_ui(/*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmpabs(/*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmpabs(/*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmpabs_d(/*const*/ IntPtr /*mpz_t*/ op1, double op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmpabs_d(/*const*/ IntPtr /*mpz_t*/ op1, double op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_cmpabs_ui(/*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_cmpabs_ui(/*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_com(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_com(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_combit(IntPtr /*mpz_t*/ rop, uint /*mp_bitcnt_t*/ bit_index);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_combit(IntPtr /*mpz_t*/ rop, uint /*mp_bitcnt_t*/ bit_index);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_congruent_p(/*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ c, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_congruent_p(/*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ c, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_congruent_2exp_p(/*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ c, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_congruent_2exp_p(/*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ c, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_congruent_ui_p(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ c, uint /*unsigned long int*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_congruent_ui_p(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ c, uint /*unsigned long int*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_divexact(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_divexact(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_divexact_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_divexact_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_divisible_p(/*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_divisible_p(/*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_divisible_ui_p(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_divisible_ui_p(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_divisible_2exp_p(/*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_divisible_2exp_p(/*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpz_dump(/*const*/ IntPtr /*mpz_t*/ x);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpz_dump(/*const*/ IntPtr /*mpz_t*/ x);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_export")]
-            public static extern IntPtr /*void **/ __gmpz_export_x86(IntPtr /*void **/ rop, ref uint /*size_t **/ countp, int order, uint /*size_t*/ size, int endian, uint /*size_t*/ nails, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_export")]
+            public static partial IntPtr /*void **/ __gmpz_export_x86(IntPtr /*void **/ rop, ref uint /*size_t **/ countp, int order, uint /*size_t*/ size, int endian, uint /*size_t*/ nails, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_export")]
-            public static extern IntPtr /*void **/ __gmpz_export_x64(IntPtr /*void **/ rop, ref ulong /*size_t **/ countp, int order, ulong /*size_t **/ size, int endian, ulong /*size_t **/ nails, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_export")]
+            public static partial IntPtr /*void **/ __gmpz_export_x64(IntPtr /*void **/ rop, ref ulong /*size_t **/ countp, int order, ulong /*size_t **/ size, int endian, ulong /*size_t **/ nails, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fac_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fac_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_2fac_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_2fac_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_mfac_uiui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n, uint /*unsigned long int*/ m);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_mfac_uiui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n, uint /*unsigned long int*/ m);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_primorial_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_primorial_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fdiv_q(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fdiv_q(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fdiv_q_2exp(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fdiv_q_2exp(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_fdiv_q_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_fdiv_q_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fdiv_qr(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fdiv_qr(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_fdiv_qr_ui(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_fdiv_qr_ui(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fdiv_r(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fdiv_r(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fdiv_r_2exp(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fdiv_r_2exp(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_fdiv_r_ui(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_fdiv_r_ui(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_fdiv_ui(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_fdiv_ui(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fib_ui(IntPtr /*mpz_t*/ fn, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fib_ui(IntPtr /*mpz_t*/ fn, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_fib2_ui(IntPtr /*mpz_t*/ fn, IntPtr /*mpz_t*/ fnsub1, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_fib2_ui(IntPtr /*mpz_t*/ fn, IntPtr /*mpz_t*/ fnsub1, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_fits_sint_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_fits_sint_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_fits_slong_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_fits_slong_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_fits_sshort_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_fits_sshort_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_fits_uint_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_fits_uint_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_fits_ulong_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_fits_ulong_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_fits_ushort_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_fits_ushort_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_gcd(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_gcd(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_gcd_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_gcd_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_gcdext(IntPtr /*mpz_t*/ g, IntPtr /*mpz_t*/ s, IntPtr /*mpz_t*/ t, /*const*/ IntPtr /*mpz_t*/ a, /*const*/ IntPtr /*mpz_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_gcdext(IntPtr /*mpz_t*/ g, IntPtr /*mpz_t*/ s, IntPtr /*mpz_t*/ t, /*const*/ IntPtr /*mpz_t*/ a, /*const*/ IntPtr /*mpz_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double __gmpz_get_d(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial double __gmpz_get_d(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double __gmpz_get_d_2exp(ref int /*long int*/ exp, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial double __gmpz_get_d_2exp(ref int /*long int*/ exp, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*long int*/ __gmpz_get_si(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int /*long int*/ __gmpz_get_si(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr /*char **/ __gmpz_get_str(IntPtr /*char **/ str, int @base, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial IntPtr /*char **/ __gmpz_get_str(IntPtr /*char **/ str, int @base, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_get_ui(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_get_ui(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_getlimbn")]
-            public static extern uint /*mp_limb_t*/ __gmpz_getlimbn_x86(/*const*/ IntPtr /*mpz_t*/ op, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_getlimbn")]
+            public static partial uint /*mp_limb_t*/ __gmpz_getlimbn_x86(/*const*/ IntPtr /*mpz_t*/ op, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_getlimbn")]
-            public static extern ulong /*mp_limb_t*/ __gmpz_getlimbn_x64(/*const*/ IntPtr /*mpz_t*/ op, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_getlimbn")]
+            public static partial ulong /*mp_limb_t*/ __gmpz_getlimbn_x64(/*const*/ IntPtr /*mpz_t*/ op, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpz_hamdist(/*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpz_hamdist(/*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_import")]
-            public static extern void __gmpz_import_x86(IntPtr /*mpz_t*/ rop, uint /*size_t*/ count, int order, uint /*size_t*/ size, int endian, uint /*size_t*/ nails, IntPtr /*void **/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_import")]
+            public static partial void __gmpz_import_x86(IntPtr /*mpz_t*/ rop, uint /*size_t*/ count, int order, uint /*size_t*/ size, int endian, uint /*size_t*/ nails, IntPtr /*void **/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_import")]
-            public static extern void __gmpz_import_x64(IntPtr /*mpz_t*/ rop, ulong /*size_t*/ count, int order, ulong /*size_t*/ size, int endian, ulong /*size_t*/ nails, IntPtr /*void **/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_import")]
+            public static partial void __gmpz_import_x64(IntPtr /*mpz_t*/ rop, ulong /*size_t*/ count, int order, ulong /*size_t*/ size, int endian, ulong /*size_t*/ nails, IntPtr /*void **/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_init(IntPtr /*mpz_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_init(IntPtr /*mpz_t*/ x);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_init2(IntPtr /*mpz_t*/ x, uint /*mp_bitcnt_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_init2(IntPtr /*mpz_t*/ x, uint /*mp_bitcnt_t*/ n);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpz_inits(IntPtr /*mpz_t*/ x, ...);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpz_inits(IntPtr /*mpz_t*/ x, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_init_set(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_init_set(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_init_set_d(IntPtr /*mpz_t*/ rop, double op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_init_set_d(IntPtr /*mpz_t*/ rop, double op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_init_set_si(IntPtr /*mpz_t*/ rop, int /*long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_init_set_si(IntPtr /*mpz_t*/ rop, int /*long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_init_set_str(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr str, int @base);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_init_set_str(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr str, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_init_set_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_init_set_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_inp_raw")]
-            public static extern uint /*size_t*/ __gmpz_inp_raw_x86(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_inp_raw")]
+            public static partial uint /*size_t*/ __gmpz_inp_raw_x86(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_inp_raw")]
-            public static extern ulong /*size_t*/ __gmpz_inp_raw_x64(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_inp_raw")]
+            public static partial ulong /*size_t*/ __gmpz_inp_raw_x64(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_inp_str")]
-            public static extern uint /*size_t*/ __gmpz_inp_str_x86(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_inp_str")]
+            public static partial uint /*size_t*/ __gmpz_inp_str_x86(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_inp_str")]
-            public static extern ulong /*size_t*/ __gmpz_inp_str_x64(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_inp_str")]
+            public static partial ulong /*size_t*/ __gmpz_inp_str_x64(IntPtr /*mpz_t*/ rop, IntPtr /*FILE **/ stream, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_invert(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_invert(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_ior(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_ior(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_jacobi(/*const*/ IntPtr /*mpz_t*/ a, /*const*/ IntPtr /*mpz_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_jacobi(/*const*/ IntPtr /*mpz_t*/ a, /*const*/ IntPtr /*mpz_t*/ b);
 
             //#define mpz_kronecker mpz_jacobi  /* alias */
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_kronecker_si(/*const*/ IntPtr /*mpz_t*/ a, int /*long int*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_kronecker_si(/*const*/ IntPtr /*mpz_t*/ a, int /*long int*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_kronecker_ui(/*const*/ IntPtr /*mpz_t*/ a, uint /*unsigned long int*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_kronecker_ui(/*const*/ IntPtr /*mpz_t*/ a, uint /*unsigned long int*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_si_kronecker(int /*long int*/ a, /*const*/ IntPtr /*mpz_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_si_kronecker(int /*long int*/ a, /*const*/ IntPtr /*mpz_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_ui_kronecker(uint /*unsigned long int*/ a, /*const*/ IntPtr /*mpz_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_ui_kronecker(uint /*unsigned long int*/ a, /*const*/ IntPtr /*mpz_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_lcm(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_lcm(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_lcm_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_lcm_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_legendre(/*const*/ IntPtr /*mpz_t*/ a, /*const*/ IntPtr /*mpz_t*/ p);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_legendre(/*const*/ IntPtr /*mpz_t*/ a, /*const*/ IntPtr /*mpz_t*/ p);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_lucnum_ui(IntPtr /*mpz_t*/ ln, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_lucnum_ui(IntPtr /*mpz_t*/ ln, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_lucnum2_ui(IntPtr /*mpz_t*/ ln, IntPtr /*mpz_t*/ lnsub1, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_lucnum2_ui(IntPtr /*mpz_t*/ ln, IntPtr /*mpz_t*/ lnsub1, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_millerrabin(/*const*/ IntPtr /*mpz_t*/ n, int reps);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_millerrabin(/*const*/ IntPtr /*mpz_t*/ n, int reps);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_mod(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_mod(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
             //#define mpz_mod_ui mpz_fdiv_r_ui /* same as fdiv_r because divisor unsigned */
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_mul(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_mul(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_mul_2exp(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*mp_bitcnt_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_mul_2exp(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*mp_bitcnt_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_mul_si(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, int /*long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_mul_si(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, int /*long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_mul_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_mul_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_neg(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_neg(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_nextprime(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_nextprime(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_out_raw")]
-            public static extern uint /*size_t*/ __gmpz_out_raw_x86(IntPtr /*FILE **/stream, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_out_raw")]
+            public static partial uint /*size_t*/ __gmpz_out_raw_x86(IntPtr /*FILE **/stream, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_out_raw")]
-            public static extern ulong /*size_t*/ __gmpz_out_raw_x64(IntPtr /*FILE **/stream, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_out_raw")]
+            public static partial ulong /*size_t*/ __gmpz_out_raw_x64(IntPtr /*FILE **/stream, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_out_str")]
-            public static extern uint /*size_t*/ __gmpz_out_str_x86(IntPtr /*FILE **/stream, int @base, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_out_str")]
+            public static partial uint /*size_t*/ __gmpz_out_str_x86(IntPtr /*FILE **/stream, int @base, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_out_str")]
-            public static extern ulong /*size_t*/ __gmpz_out_str_x64(IntPtr /*FILE **/stream, int @base, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_out_str")]
+            public static partial ulong /*size_t*/ __gmpz_out_str_x64(IntPtr /*FILE **/stream, int @base, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_perfect_power_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_perfect_power_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_perfect_square_p(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_perfect_square_p(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpz_popcount(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpz_popcount(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_pow_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, uint /*unsigned long int*/ exp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_pow_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, uint /*unsigned long int*/ exp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_powm(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, /*const*/ IntPtr /*mpz_t*/ exp, /*const*/ IntPtr /*mpz_t*/ mod);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_powm(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, /*const*/ IntPtr /*mpz_t*/ exp, /*const*/ IntPtr /*mpz_t*/ mod);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_powm_sec(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, /*const*/ IntPtr /*mpz_t*/ exp, /*const*/ IntPtr /*mpz_t*/ mod);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_powm_sec(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, /*const*/ IntPtr /*mpz_t*/ exp, /*const*/ IntPtr /*mpz_t*/ mod);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_powm_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, uint /*unsigned long int*/ exp, /*const*/ IntPtr /*mpz_t*/ mod);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_powm_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ @base, uint /*unsigned long int*/ exp, /*const*/ IntPtr /*mpz_t*/ mod);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_probab_prime_p(/*const*/ IntPtr /*mpz_t*/ n, int reps);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_probab_prime_p(/*const*/ IntPtr /*mpz_t*/ n, int reps);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)] // OBSOLETE
-            public static extern void __gmpz_random(IntPtr /*mpz_t*/ rop, int /*mp_size_t*/ max_size);
+            [LibraryImport(LibGmp)] // OBSOLETE
+            public static partial void __gmpz_random(IntPtr /*mpz_t*/ rop, int /*mp_size_t*/ max_size);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)] // OBSOLETE
-            public static extern void __gmpz_random2(IntPtr /*mpz_t*/ rop, int /*mp_size_t*/ max_size);
+            [LibraryImport(LibGmp)] // OBSOLETE
+            public static partial void __gmpz_random2(IntPtr /*mpz_t*/ rop, int /*mp_size_t*/ max_size);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_realloc2(IntPtr /*mpz_t*/ x, uint /*mp_bitcnt_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_realloc2(IntPtr /*mpz_t*/ x, uint /*mp_bitcnt_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpz_remove(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op, /*const*/ IntPtr /*mpz_t*/ f);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpz_remove(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op, /*const*/ IntPtr /*mpz_t*/ f);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_root(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_root(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_rootrem(IntPtr /*mpz_t*/ root, IntPtr /*mpz_t*/ rem, /*const*/ IntPtr /*mpz_t*/ u, uint /*unsigned long int*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_rootrem(IntPtr /*mpz_t*/ root, IntPtr /*mpz_t*/ rem, /*const*/ IntPtr /*mpz_t*/ u, uint /*unsigned long int*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_rrandomb(IntPtr /*mpz_t*/ rop, IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_rrandomb(IntPtr /*mpz_t*/ rop, IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpz_scan0(/*const*/ IntPtr /*mpz_t*/ op, uint /*mp_bitcnt_t*/ starting_bit);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpz_scan0(/*const*/ IntPtr /*mpz_t*/ op, uint /*mp_bitcnt_t*/ starting_bit);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpz_scan1(/*const*/ IntPtr /*mpz_t*/ op, uint /*mp_bitcnt_t*/ starting_bit);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpz_scan1(/*const*/ IntPtr /*mpz_t*/ op, uint /*mp_bitcnt_t*/ starting_bit);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_set(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_set(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_set_d(IntPtr /*mpz_t*/ rop, double op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_set_d(IntPtr /*mpz_t*/ rop, double op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_set_f(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_set_f(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_set_q(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_set_q(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_set_si(IntPtr /*mpz_t*/ rop, int /*long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_set_si(IntPtr /*mpz_t*/ rop, int /*long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_set_str(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_set_str(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_set_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_set_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_setbit(IntPtr /*mpz_t*/ rop, uint /*mp_bitcnt_t*/ bit_index);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_setbit(IntPtr /*mpz_t*/ rop, uint /*mp_bitcnt_t*/ bit_index);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpz_size(/*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpz_size(/*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_sizeinbase")]
-            public static extern uint /*size_t*/ __gmpz_sizeinbase_x86(/*const*/ IntPtr /*mpz_t*/ op, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_sizeinbase")]
+            public static partial uint /*size_t*/ __gmpz_sizeinbase_x86(/*const*/ IntPtr /*mpz_t*/ op, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpz_sizeinbase")]
-            public static extern ulong /*size_t*/ __gmpz_sizeinbase_x64(/*const*/ IntPtr /*mpz_t*/ op, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpz_sizeinbase")]
+            public static partial ulong /*size_t*/ __gmpz_sizeinbase_x64(/*const*/ IntPtr /*mpz_t*/ op, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_sqrt(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_sqrt(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_sqrtrem(IntPtr /*mpz_t*/ rop1, IntPtr /*mpz_t*/ rop2, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_sqrtrem(IntPtr /*mpz_t*/ rop1, IntPtr /*mpz_t*/ rop2, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_sub(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_sub(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_sub_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_sub_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_ui_sub(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_ui_sub(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_submul(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_submul(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_submul_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_submul_ui(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_swap(IntPtr /*mpz_t*/ rop1, IntPtr /*mpz_t*/ rop2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_swap(IntPtr /*mpz_t*/ rop1, IntPtr /*mpz_t*/ rop2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_tdiv_ui(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_tdiv_ui(/*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_tdiv_q(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_tdiv_q(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_tdiv_q_2exp(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_tdiv_q_2exp(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_tdiv_q_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_tdiv_q_ui(IntPtr /*mpz_t*/ q, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_tdiv_qr(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_tdiv_qr(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_tdiv_qr_ui(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_tdiv_qr_ui(IntPtr /*mpz_t*/ q, IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_tdiv_r(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_tdiv_r(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, /*const*/ IntPtr /*mpz_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_tdiv_r_2exp(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_tdiv_r_2exp(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*mp_bitcnt_t*/ b);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpz_tdiv_r_ui(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpz_tdiv_r_ui(IntPtr /*mpz_t*/ r, /*const*/ IntPtr /*mpz_t*/ n, uint /*unsigned long int*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpz_tstbit(/*const*/ IntPtr /*mpz_t*/ op, uint /*mp_bitcnt_t*/ bit_index);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpz_tstbit(/*const*/ IntPtr /*mpz_t*/ op, uint /*mp_bitcnt_t*/ bit_index);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_ui_pow_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ @base, uint /*unsigned long int*/ exp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_ui_pow_ui(IntPtr /*mpz_t*/ rop, uint /*unsigned long int*/ @base, uint /*unsigned long int*/ exp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_urandomb(IntPtr /*mpz_t*/ rop, IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_urandomb(IntPtr /*mpz_t*/ rop, IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_urandomm(IntPtr /*mpz_t*/ rop, IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*mpz_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_urandomm(IntPtr /*mpz_t*/ rop, IntPtr /*gmp_randstate_t*/ state, /*const*/ IntPtr /*mpz_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_xor(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_xor(IntPtr /*mpz_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr /*mp_limb_t**/ __gmpz_limbs_read(/*const*/ IntPtr /*mpz_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial IntPtr /*mp_limb_t**/ __gmpz_limbs_read(/*const*/ IntPtr /*mpz_t*/ x);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr /*mp_limb_t**/ __gmpz_limbs_write(/*const*/ IntPtr /*mpz_t*/ x, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial IntPtr /*mp_limb_t**/ __gmpz_limbs_write(/*const*/ IntPtr /*mpz_t*/ x, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr /*mp_limb_t**/ __gmpz_limbs_modify(/*const*/ IntPtr /*mpz_t*/ x, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial IntPtr /*mp_limb_t**/ __gmpz_limbs_modify(/*const*/ IntPtr /*mpz_t*/ x, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpz_limbs_finish(/*const*/ IntPtr /*mpz_t*/ x, int /*mp_size_t*/ s);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpz_limbs_finish(/*const*/ IntPtr /*mpz_t*/ x, int /*mp_size_t*/ s);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern /*const*/ IntPtr /*mpz_t*/ __gmpz_roinit_n(IntPtr /*mpz_t*/ x, /*const*/ IntPtr /*mp_limb_t*/ xp, int /*mp_size_t*/ xs);
+            [LibraryImport(LibGmp)]
+            public static partial /*const*/ IntPtr /*mpz_t*/ __gmpz_roinit_n(IntPtr /*mpz_t*/ x, /*const*/ IntPtr /*mp_limb_t*/ xp, int /*mp_size_t*/ xs);
 
             #endregion
 
             #region "Rational (i.e. Q) routines."
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_abs(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_abs(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_add(IntPtr /*mpq_t*/ sum, /*const*/ IntPtr /*mpq_t*/ addend1, /*const*/ IntPtr /*mpq_t*/ addend2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_add(IntPtr /*mpq_t*/ sum, /*const*/ IntPtr /*mpq_t*/ addend1, /*const*/ IntPtr /*mpq_t*/ addend2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_canonicalize(IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_canonicalize(IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_clear(IntPtr /*mpq_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_clear(IntPtr /*mpq_t*/ x);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpq_clears(IntPtr /*mpq_t*/, ...);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpq_clears(IntPtr /*mpq_t*/, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpq_cmp(/*const*/ IntPtr /*mpq_t*/ op1, /*const*/ IntPtr /*mpq_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpq_cmp(/*const*/ IntPtr /*mpq_t*/ op1, /*const*/ IntPtr /*mpq_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpq_cmp_si(/*const*/ IntPtr /*mpq_t*/ op1, int /*long int*/ num2, uint /*unsigned long int*/ den2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpq_cmp_si(/*const*/ IntPtr /*mpq_t*/ op1, int /*long int*/ num2, uint /*unsigned long int*/ den2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpq_cmp_ui(/*const*/ IntPtr /*mpq_t*/ op1, uint /*unsigned long int*/ num2, uint /*unsigned long int*/ den2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpq_cmp_ui(/*const*/ IntPtr /*mpq_t*/ op1, uint /*unsigned long int*/ num2, uint /*unsigned long int*/ den2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpq_cmp_z(/*const*/ IntPtr /*mpq_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpq_cmp_z(/*const*/ IntPtr /*mpq_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_div(IntPtr /*mpq_t*/ quotient, /*const*/ IntPtr /*mpq_t*/ dividend, /*const*/ IntPtr /*mpq_t*/ divisor);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_div(IntPtr /*mpq_t*/ quotient, /*const*/ IntPtr /*mpq_t*/ dividend, /*const*/ IntPtr /*mpq_t*/ divisor);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_div_2exp(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op1, uint /*mp_bitcnt_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_div_2exp(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op1, uint /*mp_bitcnt_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpq_equal(/*const*/ IntPtr /*mpq_t*/ op1, /*const*/ IntPtr /*mpq_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpq_equal(/*const*/ IntPtr /*mpq_t*/ op1, /*const*/ IntPtr /*mpq_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_get_num(IntPtr /*mpz_t*/ numerator, /*const*/ IntPtr /*mpq_t*/ rational);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_get_num(IntPtr /*mpz_t*/ numerator, /*const*/ IntPtr /*mpq_t*/ rational);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_get_den(IntPtr /*mpz_t*/ denominator, /*const*/ IntPtr /*mpq_t*/ rational);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_get_den(IntPtr /*mpz_t*/ denominator, /*const*/ IntPtr /*mpq_t*/ rational);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double __gmpq_get_d(/*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial double __gmpq_get_d(/*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr /*char **/ __gmpq_get_str(IntPtr /*char **/ str, int @base, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial IntPtr /*char **/ __gmpq_get_str(IntPtr /*char **/ str, int @base, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_init(IntPtr /*mpq_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_init(IntPtr /*mpq_t*/ x);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpq_inits(IntPtr /*mpq_t*/, ...);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpq_inits(IntPtr /*mpq_t*/, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpq_inp_str")]
-            public static extern uint /*size_t*/ __gmpq_inp_str_x86(IntPtr /*mpq_t*/ rop, IntPtr /*FILE **/ stream, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpq_inp_str")]
+            public static partial uint /*size_t*/ __gmpq_inp_str_x86(IntPtr /*mpq_t*/ rop, IntPtr /*FILE **/ stream, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpq_inp_str")]
-            public static extern ulong /*size_t*/ __gmpq_inp_str_x64(IntPtr /*mpq_t*/ rop, IntPtr /*FILE **/ stream, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpq_inp_str")]
+            public static partial ulong /*size_t*/ __gmpq_inp_str_x64(IntPtr /*mpq_t*/ rop, IntPtr /*FILE **/ stream, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_inv(IntPtr /*mpq_t*/ inverted_number, /*const*/ IntPtr /*mpq_t*/ number);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_inv(IntPtr /*mpq_t*/ inverted_number, /*const*/ IntPtr /*mpq_t*/ number);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_mul(IntPtr /*mpq_t*/ product, /*const*/ IntPtr /*mpq_t*/ multiplier, /*const*/ IntPtr /*mpq_t*/ multiplicand);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_mul(IntPtr /*mpq_t*/ product, /*const*/ IntPtr /*mpq_t*/ multiplier, /*const*/ IntPtr /*mpq_t*/ multiplicand);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_mul_2exp(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op1, uint /*mp_bitcnt_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_mul_2exp(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op1, uint /*mp_bitcnt_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_neg(IntPtr /*mpq_t*/ negated_operand, /*const*/ IntPtr /*mpq_t*/ operand);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_neg(IntPtr /*mpq_t*/ negated_operand, /*const*/ IntPtr /*mpq_t*/ operand);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpq_out_str")]
-            public static extern uint /*size_t*/ __gmpq_out_str_x86(IntPtr /*FILE **/ stream, int @base, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpq_out_str")]
+            public static partial uint /*size_t*/ __gmpq_out_str_x86(IntPtr /*FILE **/ stream, int @base, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpq_out_str")]
-            public static extern ulong /*size_t*/ __gmpq_out_str_x64(IntPtr /*FILE **/ stream, int @base, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpq_out_str")]
+            public static partial ulong /*size_t*/ __gmpq_out_str_x64(IntPtr /*FILE **/ stream, int @base, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_d(IntPtr /*mpq_t*/ rop, double op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_d(IntPtr /*mpq_t*/ rop, double op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_den(IntPtr /*mpq_t*/ rational, /*const*/ IntPtr /*mpz_t*/ denominator);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_den(IntPtr /*mpq_t*/ rational, /*const*/ IntPtr /*mpz_t*/ denominator);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_f(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_f(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_num(IntPtr /*mpq_t*/ rational, /*const*/ IntPtr /*mpz_t*/ numerator);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_num(IntPtr /*mpq_t*/ rational, /*const*/ IntPtr /*mpz_t*/ numerator);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_si(IntPtr /*mpq_t*/ rop, int /*long int*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_si(IntPtr /*mpq_t*/ rop, int /*long int*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpq_set_str(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpq_set_str(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_ui(IntPtr /*mpq_t*/ rop, uint /*unsigned long int*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_ui(IntPtr /*mpq_t*/ rop, uint /*unsigned long int*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_set_z(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_set_z(IntPtr /*mpq_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_sub(IntPtr /*mpq_t*/ difference, /*const*/ IntPtr /*mpq_t*/ minuend, /*const*/ IntPtr /*mpq_t*/ subtrahend);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_sub(IntPtr /*mpq_t*/ difference, /*const*/ IntPtr /*mpq_t*/ minuend, /*const*/ IntPtr /*mpq_t*/ subtrahend);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpq_swap(IntPtr /*mpq_t*/ rop1, IntPtr /*mpq_t*/ rop2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpq_swap(IntPtr /*mpq_t*/ rop1, IntPtr /*mpq_t*/ rop2);
 
             #endregion
 
             #region "Float (i.e. F) routines."
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_abs(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_abs(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_add(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_add(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_add_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_add_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_ceil(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_ceil(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_clear(IntPtr /*mpf_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_clear(IntPtr /*mpf_t*/ x);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpf_clears(IntPtr /*mpf_t*/, ...);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpf_clears(IntPtr /*mpf_t*/, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_cmp(/*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_cmp(/*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_cmp_z(/*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_cmp_z(/*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpz_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_cmp_d(/*const*/ IntPtr /*mpf_t*/ op1, double op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_cmp_d(/*const*/ IntPtr /*mpf_t*/ op1, double op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_cmp_si(/*const*/ IntPtr /*mpf_t*/ op1, int /*long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_cmp_si(/*const*/ IntPtr /*mpf_t*/ op1, int /*long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_cmp_ui(/*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_cmp_ui(/*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_div(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_div(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_div_2exp(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*mp_bitcnt_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_div_2exp(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*mp_bitcnt_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_div_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_div_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpf_dump(/*const*/ IntPtr /*mpf_t*/ op);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpf_dump(/*const*/ IntPtr /*mpf_t*/ op);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern int __gmpf_eq(/*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2, uint /*mp_bitcnt_t*/ op3);
+            //[LibraryImport(LibGmp)]
+            //public static partial int __gmpf_eq(/*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2, uint /*mp_bitcnt_t*/ op3);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_fits_sint_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_fits_sint_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_fits_slong_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_fits_slong_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_fits_sshort_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_fits_sshort_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_fits_uint_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_fits_uint_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_fits_ulong_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_fits_ulong_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_fits_ushort_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_fits_ushort_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_floor(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_floor(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double __gmpf_get_d(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial double __gmpf_get_d(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double __gmpf_get_d_2exp(ref int /*long int **/ exp, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial double __gmpf_get_d_2exp(ref int /*long int **/ exp, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpf_get_default_prec(/*void*/);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpf_get_default_prec(/*void*/);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpf_get_prec(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpf_get_prec(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*long int*/ __gmpf_get_si(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int /*long int*/ __gmpf_get_si(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_get_str")]
-            public static extern IntPtr /*char **/ __gmpf_get_str_x86(IntPtr /*char **/ str, ref int /*mp_exp_t **/ expptr, int @base, uint /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_get_str")]
+            public static partial IntPtr /*char **/ __gmpf_get_str_x86(IntPtr /*char **/ str, ref int /*mp_exp_t **/ expptr, int @base, uint /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_get_str")]
-            public static extern IntPtr /*char **/ __gmpf_get_str_x64(IntPtr /*char **/ str, ref int /*mp_exp_t **/ expptr, int @base, ulong /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_get_str")]
+            public static partial IntPtr /*char **/ __gmpf_get_str_x64(IntPtr /*char **/ str, ref int /*mp_exp_t **/ expptr, int @base, ulong /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*unsigned long int*/ __gmpf_get_ui(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*unsigned long int*/ __gmpf_get_ui(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_init(IntPtr /*mpf_t*/ x);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_init(IntPtr /*mpf_t*/ x);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_init2(IntPtr /*mpf_t*/ x, uint /*mp_bitcnt_t*/ prec);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_init2(IntPtr /*mpf_t*/ x, uint /*mp_bitcnt_t*/ prec);
 
-            //[DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern void __gmpf_inits(IntPtr /*mpf_t*/, ...);
+            //[LibraryImport(LibGmp)]
+            //public static partial void __gmpf_inits(IntPtr /*mpf_t*/, ...);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_init_set(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_init_set(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_init_set_d(IntPtr /*mpf_t*/ rop, double op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_init_set_d(IntPtr /*mpf_t*/ rop, double op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_init_set_si(IntPtr /*mpf_t*/ rop, int /*long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_init_set_si(IntPtr /*mpf_t*/ rop, int /*long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_init_set_str(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_init_set_str(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_init_set_ui(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_init_set_ui(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_inp_str")]
-            public static extern uint /*size_t*/ __gmpf_inp_str_x86(IntPtr /*mpf_t*/ rop, IntPtr /*FILE **/ stream, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_inp_str")]
+            public static partial uint /*size_t*/ __gmpf_inp_str_x86(IntPtr /*mpf_t*/ rop, IntPtr /*FILE **/ stream, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_inp_str")]
-            public static extern ulong /*size_t*/ __gmpf_inp_str_x64(IntPtr /*mpf_t*/ rop, IntPtr /*FILE **/ stream, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_inp_str")]
+            public static partial ulong /*size_t*/ __gmpf_inp_str_x64(IntPtr /*mpf_t*/ rop, IntPtr /*FILE **/ stream, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_integer_p(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_integer_p(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_mul(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_mul(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_mul_2exp(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*mp_bitcnt_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_mul_2exp(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*mp_bitcnt_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_mul_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_mul_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_neg(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_neg(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_out_str")]
-            public static extern uint /*size_t*/ __gmpf_out_str_x86(IntPtr /*FILE **/ stream, int @base, uint /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_out_str")]
+            public static partial uint /*size_t*/ __gmpf_out_str_x86(IntPtr /*FILE **/ stream, int @base, uint /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_out_str")]
-            public static extern ulong /*size_t*/ __gmpf_out_str_x64(IntPtr /*FILE **/ stream, int @base, ulong /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_out_str")]
+            public static partial ulong /*size_t*/ __gmpf_out_str_x64(IntPtr /*FILE **/ stream, int @base, ulong /*size_t*/ n_digits, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_pow_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_pow_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_random2(IntPtr /*mpf_t*/ rop, int /*mp_size_t*/ max_size, int /*mp_exp_t*/ exp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_random2(IntPtr /*mpf_t*/ rop, int /*mp_size_t*/ max_size, int /*mp_exp_t*/ exp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_reldiff(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_reldiff(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_d(IntPtr /*mpf_t*/ rop, double op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_d(IntPtr /*mpf_t*/ rop, double op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_default_prec(mp_bitcnt_t  prec);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_default_prec(mp_bitcnt_t  prec);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_prec(IntPtr /*mpf_t*/ rop, uint /*mp_bitcnt_t*/ prec);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_prec(IntPtr /*mpf_t*/ rop, uint /*mp_bitcnt_t*/ prec);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_prec_raw(IntPtr /*mpf_t*/ rop, uint /*mp_bitcnt_t*/ prec);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_prec_raw(IntPtr /*mpf_t*/ rop, uint /*mp_bitcnt_t*/ prec);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_q(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_q(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpq_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_si(IntPtr /*mpf_t*/ rop, int /*long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_si(IntPtr /*mpf_t*/ rop, int /*long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpf_set_str(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpf_set_str(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*char **/ str, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_ui(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_ui(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_set_z(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_set_z(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpz_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_size")]
-            public static extern uint /*size_t*/ __gmpf_size_x86(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_size")]
+            public static partial uint /*size_t*/ __gmpf_size_x86(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpf_size")]
-            public static extern ulong /*size_t*/ __gmpf_size_x64(/*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpf_size")]
+            public static partial ulong /*size_t*/ __gmpf_size_x64(/*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_sqrt(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_sqrt(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_sqrt_ui(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_sqrt_ui(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_sub(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_sub(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_sub_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_sub_ui(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op1, uint /*unsigned long int*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_swap(IntPtr /*mpf_t*/ rop1, IntPtr /*mpf_t*/ rop2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_swap(IntPtr /*mpf_t*/ rop1, IntPtr /*mpf_t*/ rop2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_trunc(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_trunc(IntPtr /*mpf_t*/ rop, /*const*/ IntPtr /*mpf_t*/ op);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_ui_div(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_ui_div(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_ui_sub(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_ui_sub(IntPtr /*mpf_t*/ rop, uint /*unsigned long int*/ op1, /*const*/ IntPtr /*mpf_t*/ op2);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpf_urandomb(IntPtr /*mpf_t*/ rop, IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ nbits);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpf_urandomb(IntPtr /*mpf_t*/ rop, IntPtr /*gmp_randstate_t*/ state, uint /*mp_bitcnt_t*/ nbits);
 
             #endregion
 
             #region "Low level positive-integer (i.e. N) routines."
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_add")]
-            public static extern uint /*mp_limb_t*/ __gmpn_add_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_add")]
+            public static partial uint /*mp_limb_t*/ __gmpn_add_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_add")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_add_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_add")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_add_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_add_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_add_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_add_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_add_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_add_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_add_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_add_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_add_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_add_n")]
-            public static extern uint /*mp_limb_t*/ __gmpn_add_n_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_add_n")]
+            public static partial uint /*mp_limb_t*/ __gmpn_add_n_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_add_n")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_add_n_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_add_n")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_add_n_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_addmul_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_addmul_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_addmul_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_addmul_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_addmul_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_addmul_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_addmul_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_addmul_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpn_cmp(/*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpn_cmp(/*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpn_zero_p(/*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpn_zero_p(/*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divexact_1")]
-            public static extern void __gmpn_divexact_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint /*mp_limb_t*/ d);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divexact_1")]
+            public static partial void __gmpn_divexact_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint /*mp_limb_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divexact_1")]
-            public static extern void __gmpn_divexact_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ d);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divexact_1")]
+            public static partial void __gmpn_divexact_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ d);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divexact_by3")]
-            public static extern uint /*mp_limb_t*/ __gmpn_divexact_by3_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divexact_by3")]
+            public static partial uint /*mp_limb_t*/ __gmpn_divexact_by3_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divexact_by3")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_divexact_by3_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divexact_by3")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_divexact_by3_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divexact_by3c")]
-            public static extern uint /*mp_limb_t*/ __gmpn_divexact_by3c_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint /*mp_limb_t*/ carry);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divexact_by3c")]
+            public static partial uint /*mp_limb_t*/ __gmpn_divexact_by3c_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint /*mp_limb_t*/ carry);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divexact_by3c")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_divexact_by3c_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ carry);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divexact_by3c")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_divexact_by3c_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ carry);
 
             //obsolete
             //#define mpn_divrem __MPN(divrem)
-            //public static extern mp_limb_t __gmpn_divrem(IntPtr /*mp_ptr*/, int /*mp_size_t*/, IntPtr /*mp_ptr*/, int /*mp_size_t*/, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/);
+            //public static partial mp_limb_t __gmpn_divrem(IntPtr /*mp_ptr*/, int /*mp_size_t*/, IntPtr /*mp_ptr*/, int /*mp_size_t*/, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divrem_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_divrem_1_x86(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ qxn, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n, uint /*mp_limb_t*/ s3limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divrem_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_divrem_1_x86(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ qxn, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n, uint /*mp_limb_t*/ s3limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_divrem_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_divrem_1_x64(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ qxn, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n, ulong /*mp_limb_t*/ s3limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_divrem_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_divrem_1_x64(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ qxn, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n, ulong /*mp_limb_t*/ s3limb);
 
             //obsolete
             //#define mpn_divrem_2 __MPN(divrem_2)
-            //public static extern mp_limb_t __gmpn_divrem_2(IntPtr /*mp_ptr*/, int /*mp_size_t*/, IntPtr /*mp_ptr*/, int /*mp_size_t*/, /*const*/ IntPtr /*mp_ptr*/);
+            //public static partial mp_limb_t __gmpn_divrem_2(IntPtr /*mp_ptr*/, int /*mp_size_t*/, IntPtr /*mp_ptr*/, int /*mp_size_t*/, /*const*/ IntPtr /*mp_ptr*/);
 
             //#define mpn_div_qr_1 __MPN(div_qr_1)
-            //public static extern mp_limb_t __gmpn_div_qr_1(IntPtr /*mp_ptr*/, mp_limb_t*, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, mp_limb_t);
+            //public static partial mp_limb_t __gmpn_div_qr_1(IntPtr /*mp_ptr*/, mp_limb_t*, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, mp_limb_t);
 
             //#define mpn_div_qr_2 __MPN(div_qr_2)
-            //public static extern mp_limb_t __gmpn_div_qr_2(IntPtr /*mp_ptr*/, IntPtr /*mp_ptr*/, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, /*const*/ IntPtr /*mp_ptr*/);
+            //public static partial mp_limb_t __gmpn_div_qr_2(IntPtr /*mp_ptr*/, IntPtr /*mp_ptr*/, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, /*const*/ IntPtr /*mp_ptr*/);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_gcd(IntPtr /*mp_ptr*/ rp, IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ xn, IntPtr /*mp_ptr*/ yp, int /*mp_size_t*/ yn);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_gcd(IntPtr /*mp_ptr*/ rp, IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ xn, IntPtr /*mp_ptr*/ yp, int /*mp_size_t*/ yn);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_gcd_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_gcd_1_x86(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ xn, uint /*mp_limb_t*/ ylimb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_gcd_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_gcd_1_x86(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ xn, uint /*mp_limb_t*/ ylimb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_gcd_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_gcd_1_x64(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ xn, ulong /*mp_limb_t*/ ylimb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_gcd_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_gcd_1_x64(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ xn, ulong /*mp_limb_t*/ ylimb);
 
             //#define mpn_gcdext_1 __MPN(gcdext_1)
-            //public static extern mp_limb_t __gmpn_gcdext_1(mp_limb_signed_t*, mp_limb_signed_t*, mp_limb_t, mp_limb_t);
+            //public static partial mp_limb_t __gmpn_gcdext_1(mp_limb_signed_t*, mp_limb_signed_t*, mp_limb_t, mp_limb_t);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_gcdext(IntPtr /*mp_ptr*/ gp, IntPtr /*mp_ptr*/ sp, ref int /*mp_size_t**/ sn, IntPtr /*mp_ptr*/ up, int /*mp_size_t*/ un, IntPtr /*mp_ptr*/ vp, int /*mp_size_t*/ vn);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_gcdext(IntPtr /*mp_ptr*/ gp, IntPtr /*mp_ptr*/ sp, ref int /*mp_size_t**/ sn, IntPtr /*mp_ptr*/ up, int /*mp_size_t*/ un, IntPtr /*mp_ptr*/ vp, int /*mp_size_t*/ vn);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_get_str")]
-            public static extern uint /*size_t*/ __gmpn_get_str_x86(IntPtr /*unsigned char **/ str, int @base, IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_get_str")]
+            public static partial uint /*size_t*/ __gmpn_get_str_x86(IntPtr /*unsigned char **/ str, int @base, IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_get_str")]
-            public static extern ulong /*size_t*/ __gmpn_get_str_x64(IntPtr /*unsigned char **/ str, int @base, IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_get_str")]
+            public static partial ulong /*size_t*/ __gmpn_get_str_x64(IntPtr /*unsigned char **/ str, int @base, IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpn_hamdist(/*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpn_hamdist(/*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_lshift")]
-            public static extern uint /*mp_limb_t*/ __gmpn_lshift_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_lshift")]
+            public static partial uint /*mp_limb_t*/ __gmpn_lshift_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_lshift")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_lshift_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_lshift")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_lshift_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_mod_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_mod_1_x86(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, uint /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_mod_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_mod_1_x86(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, uint /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_mod_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_mod_1_x64(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, ulong /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_mod_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_mod_1_x64(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, ulong /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_mul")]
-            public static extern uint /*mp_limb_t*/ __gmpn_mul_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_mul")]
+            public static partial uint /*mp_limb_t*/ __gmpn_mul_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_mul")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_mul_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_mul")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_mul_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_mul_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_mul_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_mul_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_mul_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_mul_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_mul_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_mul_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_mul_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_mul_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_mul_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_sqr(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_sqr(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_neg")]
-            public static extern uint /*mp_limb_t*/ __gmpn_neg_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_neg")]
+            public static partial uint /*mp_limb_t*/ __gmpn_neg_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_neg")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_neg_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_neg")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_neg_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_com(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_com(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpn_perfect_square_p(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpn_perfect_square_p(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpn_perfect_power_p(/*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpn_perfect_power_p(/*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpn_popcount(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpn_popcount(/*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
 
             //#define mpn_pow_1 __MPN(pow_1)
-            //public static extern int /*mp_size_t*/ __gmpn_pow_1(IntPtr /*mp_ptr*/, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, mp_limb_t, IntPtr /*mp_ptr*/);
+            //public static partial int /*mp_size_t*/ __gmpn_pow_1(IntPtr /*mp_ptr*/, /*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, mp_limb_t, IntPtr /*mp_ptr*/);
 
             ///* undocumented now, but retained here for upward compatibility */
             //#define mpn_preinv_mod_1 __MPN(preinv_mod_1)
-            //public static extern mp_limb_t __gmpn_preinv_mod_1(/*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, mp_limb_t, mp_limb_t);
+            //public static partial mp_limb_t __gmpn_preinv_mod_1(/*const*/ IntPtr /*mp_ptr*/, int /*mp_size_t*/, mp_limb_t, mp_limb_t);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_random(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ r1n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_random(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ r1n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_random2(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ r1n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_random2(IntPtr /*mp_ptr*/ r1p, int /*mp_size_t*/ r1n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_rshift")]
-            public static extern uint /*mp_limb_t*/ __gmpn_rshift_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_rshift")]
+            public static partial uint /*mp_limb_t*/ __gmpn_rshift_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_rshift")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_rshift_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_rshift")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_rshift_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n, uint count);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpn_scan0(/*const*/ IntPtr /*mp_ptr*/ s1p, uint /*mp_bitcnt_t*/ bit);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpn_scan0(/*const*/ IntPtr /*mp_ptr*/ s1p, uint /*mp_bitcnt_t*/ bit);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern uint /*mp_bitcnt_t*/ __gmpn_scan1(/*const*/ IntPtr /*mp_ptr*/ s1p, uint /*mp_bitcnt_t*/ bit);
+            [LibraryImport(LibGmp)]
+            public static partial uint /*mp_bitcnt_t*/ __gmpn_scan1(/*const*/ IntPtr /*mp_ptr*/ s1p, uint /*mp_bitcnt_t*/ bit);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_set_str")]
-            public static extern int /*mp_size_t*/ __gmpn_set_str_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*unsigned char **/ str, uint /*size_t*/ strsize, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_set_str")]
+            public static partial int /*mp_size_t*/ __gmpn_set_str_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*unsigned char **/ str, uint /*size_t*/ strsize, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_set_str")]
-            public static extern int /*mp_size_t*/ __gmpn_set_str_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*unsigned char **/ str, ulong /*size_t*/ strsize, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_set_str")]
+            public static partial int /*mp_size_t*/ __gmpn_set_str_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*unsigned char **/ str, ulong /*size_t*/ strsize, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sizeinbase")]
-            public static extern uint /*size_t*/ __gmpn_sizeinbase_x86(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ n, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sizeinbase")]
+            public static partial uint /*size_t*/ __gmpn_sizeinbase_x86(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ n, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sizeinbase")]
-            public static extern ulong /*size_t*/ __gmpn_sizeinbase_x64(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ n, int @base);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sizeinbase")]
+            public static partial ulong /*size_t*/ __gmpn_sizeinbase_x64(/*const*/ IntPtr /*mp_ptr*/ xp, int /*mp_size_t*/ n, int @base);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sqrtrem(IntPtr /*mp_ptr*/ r1p, IntPtr /*mp_ptr*/ r2p, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sqrtrem(IntPtr /*mp_ptr*/ r1p, IntPtr /*mp_ptr*/ r2p, /*const*/ IntPtr /*mp_ptr*/ sp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sub")]
-            public static extern uint /*mp_limb_t*/ __gmpn_sub_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sub")]
+            public static partial uint /*mp_limb_t*/ __gmpn_sub_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sub")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_sub_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sub")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_sub_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ s1n, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ s2n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sub_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_sub_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sub_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_sub_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sub_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_sub_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sub_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_sub_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sub_n")]
-            public static extern uint /*mp_limb_t*/ __gmpn_sub_n_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sub_n")]
+            public static partial uint /*mp_limb_t*/ __gmpn_sub_n_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sub_n")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_sub_n_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sub_n")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_sub_n_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_submul_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_submul_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_submul_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_submul_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, uint /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_submul_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_submul_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_submul_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_submul_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ s2limb);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_tdiv_qr(IntPtr /*mp_ptr*/ qp, IntPtr /*mp_ptr*/ rp, int /*mp_size_t*/ qxn, /*const*/ IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_tdiv_qr(IntPtr /*mp_ptr*/ qp, IntPtr /*mp_ptr*/ rp, int /*mp_size_t*/ qxn, /*const*/ IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_and_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_and_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_andn_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_andn_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_nand_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_nand_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_ior_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_ior_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_iorn_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_iorn_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_nior_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_nior_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_xor_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_xor_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_xnor_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_xnor_n(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_copyi(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_copyi(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_copyd(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_copyd(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_zero(IntPtr /*mp_ptr*/ rp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_zero(IntPtr /*mp_ptr*/ rp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_cnd_add_n")]
-            public static extern uint /*mp_limb_t*/ __gmpn_cnd_add_n_x86(uint /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_cnd_add_n")]
+            public static partial uint /*mp_limb_t*/ __gmpn_cnd_add_n_x86(uint /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_cnd_add_n")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_cnd_add_n_x64(ulong /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_cnd_add_n")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_cnd_add_n_x64(ulong /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_cnd_sub_n")]
-            public static extern uint /*mp_limb_t*/ __gmpn_cnd_sub_n_x86(uint /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_cnd_sub_n")]
+            public static partial uint /*mp_limb_t*/ __gmpn_cnd_sub_n_x86(uint /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_cnd_sub_n")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_cnd_sub_n_x64(ulong /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_cnd_sub_n")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_cnd_sub_n_x64(ulong /*mp_limb_t*/ cnd, IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ s1p, /*const*/ IntPtr /*mp_ptr*/ s2p, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sec_add_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_sec_add_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, uint /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sec_add_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_sec_add_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, uint /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sec_add_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_sec_add_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sec_add_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_sec_add_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_add_1_itch(int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_add_1_itch(int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sec_sub_1")]
-            public static extern uint /*mp_limb_t*/ __gmpn_sec_sub_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, uint /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sec_sub_1")]
+            public static partial uint /*mp_limb_t*/ __gmpn_sec_sub_1_x86(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, uint /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sec_sub_1")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_sec_sub_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sec_sub_1")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_sec_sub_1_x64(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ n, ulong /*mp_limb_t*/ b, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_sub_1_itch(int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_sub_1_itch(int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_cnd_swap")]
-            public static extern void __gmpn_cnd_swap_x86(uint /*mp_limb_t*/ cnd, /*volatile*/ IntPtr /*mp_limb_t**/ ap, /*volatile*/ IntPtr /*mp_limb_t**/ bp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_cnd_swap")]
+            public static partial void __gmpn_cnd_swap_x86(uint /*mp_limb_t*/ cnd, /*volatile*/ IntPtr /*mp_limb_t**/ ap, /*volatile*/ IntPtr /*mp_limb_t**/ bp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_cnd_swap")]
-            public static extern void __gmpn_cnd_swap_x64(ulong /*mp_limb_t*/ cnd, /*volatile*/ IntPtr /*mp_limb_t**/ ap, /*volatile*/ IntPtr /*mp_limb_t**/ bp, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_cnd_swap")]
+            public static partial void __gmpn_cnd_swap_x64(ulong /*mp_limb_t*/ cnd, /*volatile*/ IntPtr /*mp_limb_t**/ ap, /*volatile*/ IntPtr /*mp_limb_t**/ bp, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_sec_mul(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ an, /*const*/ IntPtr /*mp_ptr*/ b, int /*mp_size_t*/ bn, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_sec_mul(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ an, /*const*/ IntPtr /*mp_ptr*/ b, int /*mp_size_t*/ bn, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_mul_itch(int /*mp_size_t*/ an, int /*mp_size_t*/ bn);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_mul_itch(int /*mp_size_t*/ an, int /*mp_size_t*/ bn);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_sec_sqr(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ an, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_sec_sqr(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ ap, int /*mp_size_t*/ an, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_sqr_itch(int /*mp_size_t*/ an);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_sqr_itch(int /*mp_size_t*/ an);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_sec_powm(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ bp, int /*mp_size_t*/ bn, /*const*/ IntPtr /*mp_ptr*/ ep, uint /*mp_bitcnt_t*/ enb, /*const*/ IntPtr /*mp_ptr*/ mp, int /*mp_size_t*/ n, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_sec_powm(IntPtr /*mp_ptr*/ rp, /*const*/ IntPtr /*mp_ptr*/ bp, int /*mp_size_t*/ bn, /*const*/ IntPtr /*mp_ptr*/ ep, uint /*mp_bitcnt_t*/ enb, /*const*/ IntPtr /*mp_ptr*/ mp, int /*mp_size_t*/ n, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_powm_itch(int /*mp_size_t*/ bn, uint /*mp_bitcnt_t*/ enb, int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_powm_itch(int /*mp_size_t*/ bn, uint /*mp_bitcnt_t*/ enb, int /*mp_size_t*/ n);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_sec_tabselect(/*volatile*/ IntPtr /*mp_limb_t**/ rp, /*volatile const*/ IntPtr /*mp_limb_t**/ tab, int /*mp_size_t*/ n, int /*mp_size_t*/ nents, int /*mp_size_t*/ which);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_sec_tabselect(/*volatile*/ IntPtr /*mp_limb_t**/ rp, /*volatile const*/ IntPtr /*mp_limb_t**/ tab, int /*mp_size_t*/ n, int /*mp_size_t*/ nents, int /*mp_size_t*/ which);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sec_div_qr")]
-            public static extern uint /*mp_limb_t*/ __gmpn_sec_div_qr_x86(IntPtr /*mp_ptr*/ qp, IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sec_div_qr")]
+            public static partial uint /*mp_limb_t*/ __gmpn_sec_div_qr_x86(IntPtr /*mp_ptr*/ qp, IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl, EntryPoint = "__gmpn_sec_div_qr")]
-            public static extern ulong /*mp_limb_t*/ __gmpn_sec_div_qr_x64(IntPtr /*mp_ptr*/ qp, IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp, EntryPoint = "__gmpn_sec_div_qr")]
+            public static partial ulong /*mp_limb_t*/ __gmpn_sec_div_qr_x64(IntPtr /*mp_ptr*/ qp, IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_div_qr_itch(int /*mp_size_t*/ nn, int /*mp_size_t*/ dn);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_div_qr_itch(int /*mp_size_t*/ nn, int /*mp_size_t*/ dn);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void __gmpn_sec_div_r(IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp)]
+            public static partial void __gmpn_sec_div_r(IntPtr /*mp_ptr*/ np, int /*mp_size_t*/ nn, /*const*/ IntPtr /*mp_ptr*/ dp, int /*mp_size_t*/ dn, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_div_r_itch(int /*mp_size_t*/ nn, int /*mp_size_t*/ dn);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_div_r_itch(int /*mp_size_t*/ nn, int /*mp_size_t*/ dn);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int __gmpn_sec_invert(IntPtr /*mp_ptr*/ rp, IntPtr /*mp_ptr*/ ap, /*const*/ IntPtr /*mp_ptr*/ mp, int /*mp_size_t*/ n, uint /*mp_bitcnt_t*/ nbcnt, IntPtr /*mp_ptr*/ tp);
+            [LibraryImport(LibGmp)]
+            public static partial int __gmpn_sec_invert(IntPtr /*mp_ptr*/ rp, IntPtr /*mp_ptr*/ ap, /*const*/ IntPtr /*mp_ptr*/ mp, int /*mp_size_t*/ n, uint /*mp_bitcnt_t*/ nbcnt, IntPtr /*mp_ptr*/ tp);
 
-            [DllImport(LibGmp, CallingConvention = CallingConvention.Cdecl)]
-            public static extern int /*mp_size_t*/ __gmpn_sec_invert_itch(int /*mp_size_t*/ n);
+            [LibraryImport(LibGmp)]
+            public static partial int /*mp_size_t*/ __gmpn_sec_invert_itch(int /*mp_size_t*/ n);
 
             #endregion
 
